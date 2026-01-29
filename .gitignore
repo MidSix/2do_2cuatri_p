@@ -1,0 +1,43 @@
+# Let me explain this .gitignore
+# It's a very helpful approach to have everything about a subject inside
+# just one folder. This .gitignore basically tells git to ignore
+# EVERYTHING inside the folder except for the p (practice) directory of
+# each subject. So you can have whatever you want inside the subject
+# folder and as long as is not inside p folder is goona be ignored
+# and won't be eligible for versioninig. With this you can have for
+# example inside FAA a folder for the theory pdf's, another folder for
+# test code, whatever. And those folders won't be tracked, I really
+# found this usefull, so it's not an error to not
+# ignore this .gitignore.
+
+# So because of this configuration, anything added outside
+# of p folder in each subject will be ignored for versioning.
+# That includes changing the name of the folder from p -> whatever.
+# So please don't change the name of p folder.
+
+# Same goes for the names of each subject folder. If the names are
+# changed then the filter won't work and everything will be ignored
+# for versioning.
+
+#---------------------please_don't_modify------------------------------
+/*
+!.gitignore
+
+!ABIA/
+!ALF/
+!CCPD/
+!FAA/
+!RCR/
+
+ABIA/*
+ALF/*
+CCPD/*
+FAA/*
+RCR/*
+
+!ABIA/p
+!ALF/p
+!CCPD/p
+!FAA/p
+!RCR/p
+#---------------------please_don't_modify------------------------------
