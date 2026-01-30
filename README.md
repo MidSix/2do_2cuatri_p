@@ -38,15 +38,15 @@ for versioning.
 you can have a subject folder like this.  
 FAA/   
 ├── p/  
-├── notes/  
+├── notas/  
 ├── pdfs_theory/  
 ├── code_examples/  
 ├── TGR's/  
 ├── past_tests/  
 └── whatever/  
 
-- and **ONLY**: `p/` and `notes/` are being tracked.  
+- and **ONLY**: `p/` and `notas/` are being tracked.  
 - As long as you don't change the names of the **subjects**, 
-- the names of `p/` and `notes/`  
-- And the file structure (putting `notes/` or `p/` inside other folders or something like that)  
+- the names of `p/` and `notas/`  
+- And the file structure (putting `notas/` or `p/` inside other folders or something like that)  
     Everything will work alright
