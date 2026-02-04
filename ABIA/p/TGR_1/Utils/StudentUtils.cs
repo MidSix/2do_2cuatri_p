@@ -6,6 +6,7 @@ Miembros:
 Grupo de prácticas:
     G1.1 - jueves.
 */
+
 using System.Globalization;
 
 namespace TGR_1.Utils
@@ -182,6 +183,45 @@ namespace TGR_1.Utils
         {
             try
             {
+                /*
+                    Aqui comprobamos si el path que nos pasa el usuario
+                    es un directorio, de ser asi entonces le agregamos
+                    a ese path el nombre por defecto que tendra
+                    el archivo que guardaremos dentro.
+
+                    - TrimEnd() -> Simplemente elimina los posibles
+                    espacios que pueden tener las direcciones de los
+                    usuarios, en caso que todo el path usara guiones
+                    bajos TrimEnd() no solucionaria ningun problema
+                    porque no habria ninguno que solucionar xd, pero
+                    por robustez se mantiene.
+                    -EndsWith() -> Self-explanatory
+                */
+                if (filePath.TrimEnd().EndsWith(Path.DirectorySeparatorChar) ||
+                    filePath.TrimEnd().EndsWith(Path.AltDirectorySeparatorChar) ||
+                    Directory.Exists(filePath))
+                {
+                    string defaultName = "StudentList.csv";
+                    // Solo informar si es algo explícito (para no spammear)
+                    Console.WriteLine($"[INFO] La ruta es un directorio. Guardando como '{defaultName}' dentro de él.");
+                    /*
+                        Este metodo es simplemente una concatenacion.
+                        Pero una avanzada porque tiene en cuenta el SO
+                        el usuario. Si es windows concatena con "\" y
+                        si es MacOS o Linux concatena con "/" las
+                        direcciones.
+                    */
+                    filePath = Path.Combine(filePath, defaultName);
+                }
+
+                // Verificar y crear el directorio padre si no existe
+                string? parentDir = Path.GetDirectoryName(filePath);
+                if (!string.IsNullOrEmpty(parentDir) && !Directory.Exists(parentDir))
+                {
+                    Console.WriteLine($"[INFO] Creando directorio: {parentDir}");
+                    Directory.CreateDirectory(parentDir);
+                }
+
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     foreach (var s in students)
