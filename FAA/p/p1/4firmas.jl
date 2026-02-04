@@ -15,6 +15,7 @@ function oneHotEncoding(feature::AbstractArray{<:Any,1}, classes::AbstractArray{
     #
     # Codigo a desarrollar
     #
+    
 end;
 
 function oneHotEncoding(feature::AbstractArray{<:Any,1})
