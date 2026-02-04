@@ -23,7 +23,7 @@
 
 #---------------------please_don't_modify------------------------------
 /*
-.gitignore
+!.gitignore
 
 !ABIA/
 !ALF/
@@ -38,6 +38,8 @@ FAA/*
 RCR/*
 
 !ABIA/p
+ABIA/p/TGR_1/obj/
+ABIA/p/TGR_1/bin/
 !ABIA/notas
 
 !ALF/p
