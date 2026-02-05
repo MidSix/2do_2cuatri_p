@@ -6,7 +6,7 @@ En C#, el manejo de condiciones en una línea y valores nulos es más estricto y
 
 Permite realizar una asignación condicional en una sola línea.
 
-### Sintaxis C#
+### Sintaxis C\#
 ```csharp
 condicion ? valor_si_cierto : valor_si_falso;
 ```

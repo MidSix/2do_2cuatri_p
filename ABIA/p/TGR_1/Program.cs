@@ -62,12 +62,12 @@ class Program
             */
             catch(FormatException e)
             {
-                Console.WriteLine($"Error {e}\n" +
+                Console.WriteLine($"Error: {e.Message}\n" +
                 "->Por favor introduce un numero entero\n");
             }
             catch(Exception e)
             {
-                Console.WriteLine($"Excepcion desconocida {e}\n" +
+                Console.WriteLine($"Excepcion desconocida: {e.Message}\n" +
                 "->Por favor vuelva a intentarlo\n");
             }
         }

@@ -134,6 +134,9 @@ public class Exercise1
                         por debajo.
                         */
                         string n = Console.ReadLine() ?? "SinNombre";
+                        //Esta funcion sirve para validar que no
+                        //sea una secuencia de numeros el nombre.
+                        StudentUtils.ValidateName(n);
                         /*
                             Hay que recordar como se transmiten las
                             excepciones. Estas suben hasta encontrar
@@ -159,6 +162,7 @@ public class Exercise1
                     {
                         Console.Write("Nombre del estudiante a editar: ");
                         string name = Console.ReadLine() ?? "SinNombre";
+                        StudentUtils.ValidateName(name);
                         Console.Write("Nueva nota: ");
                         double grade = Convert.ToDouble(Console.ReadLine());
                         bool ok = StudentUtils.EditStudentGrade(students, name, grade);
@@ -204,23 +208,22 @@ public class Exercise1
 
             catch(FormatException e)
             {
-                Console.WriteLine($"Error {e}\n" +
-                "La opcion proporcionada ni existe ni es entera\n" +
-                "Por favor, escribe un numero entero\n");
+                Console.WriteLine($"Error: {e.Message}\n" +
+                "Por favor, vuelve a intentarlo\n");
             }
             catch(KeyNotFoundException e)
             {
-                Console.WriteLine($"Error {e}\n" +
+                Console.WriteLine($"Error: {e.Message}\n" +
                 "La opcion proporcionada no existe\n");
             }
             catch(ArgumentNullException e)
             {
-                Console.WriteLine($"Error {e}\n" +
+                Console.WriteLine($"Error: {e.Message}\n" +
                 "Cortaste el flujo del programa\n");
             }
             catch(Exception e)
             {
-                Console.WriteLine($"Error desconocido\n{e}");
+                Console.WriteLine($"Error:\n{e.Message}");
             }
         }
     }

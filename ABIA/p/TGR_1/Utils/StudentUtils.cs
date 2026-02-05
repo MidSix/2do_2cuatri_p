@@ -91,9 +91,17 @@ namespace TGR_1.Utils
                 }
                 Console.WriteLine($"\n[INFO] Lista actualizada. {container.Count} estudiantes en memoria.");
             }
+            catch(ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine($"Error with age inside .csv: {e.Message}");
+            }
+            catch(FormatException e)
+            {
+                Console.WriteLine($"Error with name inside .csv: {e.Message}");
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al procesar el archivo: {ex}");
+                Console.WriteLine($"Error al procesar el archivo: {ex.Message}");
             }
         }
 
@@ -250,6 +258,38 @@ namespace TGR_1.Utils
                 Console.WriteLine("Por favor carga primero\n" +
                 "una lista de estudiantes no vacia\n");
                 return true;
+            }
+        }
+
+        public static void ValidateName(string name)
+        {
+            /*
+            Si el usuario escribe un numero como nombre, al ser int
+            un tipo mas restrictivo que string, es decir, string
+            contiene a int, un int, o un numero en general, escrito
+            por el usuario puede convertirse a string, y si es un string
+            el programa no ve ningun fallo en que el alumno x se llame
+            175829035723405, pero en la vida real nadie tiene de nombre
+            un numero xd, entonces para validar que el nombre no es un
+            numero se implementa la siguiente logica.
+            El usuario proporciona un string como nombre, nosotros
+            pasamos ese nombre a esta funcion, intentamos convertir ese
+            nombre en un entero.
+            Si se puede -> Es un número, lanzamos FormatException.
+            Si no se puede -> Es un nombre real y no hacemos nada.
+            Dejamos que el programa continue.
+
+            - TryParse devuelve true si lo puede transformar
+            por eso si no puede hacerlo no se activa el if y no raisea
+            ninguna excepcion.
+            */
+            if (int.TryParse(name, out _))
+            {
+                throw new FormatException("Un nombre no puede ser un número.");
+            }
+            if (double.TryParse(name, out _))
+            {
+            throw new FormatException("Un nombre no puede ser un número (demasiado grande).");
             }
         }
     }
