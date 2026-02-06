@@ -2,7 +2,7 @@
 
 ## Start working
 
-### If you already have a remote repository that has content
+### If there is a remote repository that has content (which is the case)
 If the repo already exists remotely and have content, 
 you **don't have to initialize anything locally**.  
 Just clone it inside an empty folder:  
