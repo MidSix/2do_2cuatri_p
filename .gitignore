@@ -40,6 +40,8 @@ RCR/*
 !ABIA/p
 ABIA/p/TGR_1/obj/
 ABIA/p/TGR_1/bin/
+ABIA/p/TGR_1/TGR_1.sln
+ABIA/p/TGR_1/TGR1_XoelSanchezDacoba_SebastianDavidMorenoExposito.zip
 !ABIA/notas
 
 !ALF/p
@@ -47,11 +49,11 @@ ABIA/p/TGR_1/bin/
 
 !CCPD/p
 !CCPD/notas
-
-!FAA/p
-!FAA/notas
+# Se elimino del remoto la carpeta FAA de practicas y se dejo de
+# trackear, esto para crear un repositorio distinto con las practicas
+# de esta asignatura.
 
 !RCR/p
 !RCR/notas
 
-#---------------------please_don't_modify------------------------------ 
+#---------------------please_don't_modify-------------------------------

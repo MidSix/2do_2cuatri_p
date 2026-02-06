@@ -174,7 +174,8 @@ namespace TGR_1.Utils
             }
         }
 
-        // Editar nota por nombre
+        /**/
+        // Find funciona como un foreach (analogo al for de python)
         public static bool EditStudentGrade(List<Student> students, string name, double newGrade)
         {
             var student = students.Find(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
