@@ -48,13 +48,13 @@ def qu(n:int) -> bool:#Apartado Opcional, podria implementarlo sobre qa, pero no
 #a valores altos de n, incluyendo conclusiones sobre resultados obtenidos
 #Pero no me parece que haga falta ya que el qa parece bien hecho
 if __name__ == "__main__":
-    #$ python q.py -a int or $ python q.py -u int
+    #$ python q.py -qa int or $ python q.py -qu int
     parser = argparse.ArgumentParser(description="Process some integers.")
-    parser.add_argument('-a', type=int, help='Call function qa with an integer argument')
-    parser.add_argument('-u', type=int, help='Call function qu with an integer argument')
+    parser.add_argument('-qa', type=int, help='Call function qa with an integer argument')
+    parser.add_argument('-qu', type=int, help='Call function qu with an integer argument')
     args = parser.parse_args()
-    if args.a is not None:
-        qa(args.a)
-    elif args.u is not None:
-        qu(args.u)
+    if args.qa is not None:
+        qa(args.qa)
+    elif args.qu is not None:
+        qu(args.qu)
     

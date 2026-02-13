@@ -20,9 +20,11 @@ def mg_str(chain:str)->bool: #Apartado opcional, este era chill
     chain=chain.replace(" ","")#Entendemos que los espacios no cuentan, así que los eliminamos para facilitar cálculos posteriores
     if chain=="mg":#Si la cadena es "mg", es correcta(Esto es para ahorrar cálculos posteriores, aunque no deberia ser necesario)
         return print("Yes")
-    
-    indx_m=chain.index("m")
-    indx_g=chain.index("g")
+    try:
+        indx_m=chain.index("m")
+        indx_g=chain.index("g")
+    except ValueError:
+        return print("No")
     
     if ((indx_m>indx_g) #Si m aparece después de g, la cadena es incorrecta
     or (chain.count("m")!=1 or chain.count("g")!=1)#Si hay más de una m o g, la cadena es incorrecta
@@ -37,6 +39,7 @@ def mg_str(chain:str)->bool: #Apartado opcional, este era chill
     
     if ((z==0 or y==0)#Es imposible obtener cadenas de con y=0 o z=0 
     or ((x>=z) or (y>z))#Si x es mayor o igual a z, es incorrecta, o si y es mayor que z, también lo es
+    or y==z and x!=0  #es imposible que x sea mayor que cero cuando y=z
     ): 
         return print("No")
     
@@ -55,4 +58,3 @@ if __name__ == "__main__":
         mg_int(args.n)
     elif args.s is not None:
         mg_str(args.s)
-
