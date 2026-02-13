@@ -1,9 +1,2 @@
-﻿/*
-Miembros:
-    - Xoel Sánchez Dacoba
-    - Sebastián David Moreno Expósito
-Grupo de prácticas:
-    G1.1 - jueves.
-*/
+﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
-

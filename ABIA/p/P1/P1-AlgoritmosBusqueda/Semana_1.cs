@@ -1,5 +1,3 @@
-namespace ConsoleApp1;
-
 public class Solucion
 {
     public int Coste { get; set; }
@@ -7,7 +5,7 @@ public class Solucion
 
     public static bool Eq( Tuple<int,int> Coords,int Coste)
     {
-        return str()==1;
+        return 1==1;
     }
 
 
