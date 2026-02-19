@@ -57,15 +57,5 @@ public class Solucion
         return a > b || a == b;
     }
     //6 lineas de metodos mágicos en python = 40 lineas en C#, me encanta esta vaina
-
 }
-public interface IListaCandidatos// Esto es como una clase abstracta en Python, pero en C# se llama interfaz
-{
-    void Anhadir(Solucion solucion, int prioridad = 0);
-    void Borrar(Solucion solucion);
-    Solucion ObtenerSiguiente();
-    int Count { get; } // Reemplaza al __len__
-}
-
-
 }
