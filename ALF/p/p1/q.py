@@ -15,8 +15,8 @@ def qa(n:int) -> bool:
             last_j+=1
         else:
             i+=1
-            j-=1       
-    print(Result)        
+            j-=1
+    print(Result)
     return True
 
 
@@ -33,15 +33,15 @@ def qu(n:int) -> bool:#Apartado Opcional, podria implementarlo sobre qa, pero no
         elif j%i==0 and j!=i:
             Result+=f"{i}/{j} "
             prints+=1
-            
+
         if j==0:
             j=last_j+1
             i=0
             last_j+=1
         else:
             i+=1
-            j-=1       
-    print(Result)    
+            j-=1
+    print(Result)
     return True
 
 #El apartado opcional incluye una medición de tiempos y comparación entre ambos
@@ -57,4 +57,3 @@ if __name__ == "__main__":
         qa(args.qa)
     elif args.qu is not None:
         qu(args.qu)
-    

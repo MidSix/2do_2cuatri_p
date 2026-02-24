@@ -42,6 +42,7 @@ public class Hija : Padre
 {
     //                                         Firma del Constructor
     //                                              ↓↓↓↓↓↓↓↓
+    // Si el metodo tiene el mismo nombre que el padre -> Es el constructor
     public Hija(string datoHija, string datoPadre) : base(datoPadre)
     {
         // Cuando entras aquí, el Padre YA está construido.
