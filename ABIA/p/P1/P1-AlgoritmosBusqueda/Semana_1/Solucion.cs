@@ -1,15 +1,28 @@
+/*
+Miembros:
+    - Xoel Sánchez Dacoba
+    - Sebastián David Moreno Expósito
+Grupo de prácticas:
+    G1.1 - jueves.
+*/
 namespace n_reinas
 {
-public class Solucion
+public class Solucion(int coste, List<Tuple<int,int>>? coords)
 {
-    public int Coste { get; set; }
-    public Tuple<int,int>? Coords { get; set; }
+    public int Coste { get; set; } = coste;
+    public List<Tuple<int,int>>? Coords { get; set; } = coords;
+
 
     public override string ToString()//__str__
     {
         if (this.Coords != null)
         {
-            return $"{this.Coords.Item1}-{this.Coords.Item2}";
+            string result = "";
+            foreach (var coord in this.Coords)
+            {
+                result += $"{coord.Item1}-{coord.Item2} ";
+            }
+            return result.TrimEnd();
         }
         return "Coordenadas: No definidas";
     }
@@ -18,17 +31,19 @@ public class Solucion
     public static bool operator !=(Solucion a, Solucion b) => !(a == b);
     public override bool Equals(object? obj) 
     {
+        if (obj is not Solucion other) return false;
+        if (ReferenceEquals(this, other)) return true;
         
-        if (obj is not Solucion other) return false;// Si el otro objeto es nulo o no es de tipo Solucion, no son iguales
-
-        if (ReferenceEquals(this, other)) return true;  // Si son la misma referencia en memoria, son iguales (optimización)
-
-        return this.Coords == other.Coords;// Comparamos el contenido real
+        if (this.Coords == null && other.Coords == null) return true;
+        if (this.Coords == null || other.Coords == null) return false;
+        
+        return this.Coords.SequenceEqual(other.Coords);
     }
 
     public override int GetHashCode() 
     {
-        return HashCode.Combine(Coords);//Esto es una parida rara de referenciacion, no lo acabo de entender bien aun
+        if (Coords == null) return 0;
+        return HashCode.Combine(string.Join(",", Coords.Select(c => $"{c.Item1}-{c.Item2}")));
     }
     
     public static bool operator <(Solucion? a, Solucion? b)
@@ -42,19 +57,18 @@ public class Solucion
 
     public static bool operator >(Solucion? a, Solucion? b)
     {
-        // Reutilizamos la lógica: "a > b" es lo mismo que decir "b < a"
-        return b < a;
+        return b < a;// Reutilizamos la lógica: "a > b" es lo mismo que decir "b < a"
+
     }
 
     public static bool operator <=(Solucion? a, Solucion? b)
     {
-        // "Menor o igual" es: o es menor, o son iguales
-        return a < b || a == b;
+        return a < b || a?.Equals(b) == true;
     }
 
     public static bool operator >=(Solucion? a, Solucion? b)
     {
-        return a > b || a == b;
+        return a > b || a?.Equals(b) == true;
     }
     //6 lineas de metodos mágicos en python = 40 lineas en C#, me encanta esta vaina
 }

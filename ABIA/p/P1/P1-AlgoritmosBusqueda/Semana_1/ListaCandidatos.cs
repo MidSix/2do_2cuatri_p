@@ -1,3 +1,10 @@
+/*
+Miembros:
+    - Xoel Sánchez Dacoba
+    - Sebastián David Moreno Expósito
+Grupo de prácticas:
+    G1.1 - jueves.
+*/
 namespace n_reinas
 {
 public interface IListaCandidatos// Esto es como una clase abstracta en Python, pero en C# se llama interfaz

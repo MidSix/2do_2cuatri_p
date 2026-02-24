@@ -1,0 +1,15 @@
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\bin\Debug\net10.0\P1-AlgoritmosBusqueda.exe
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\bin\Debug\net10.0\P1-AlgoritmosBusqueda.deps.json
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\bin\Debug\net10.0\P1-AlgoritmosBusqueda.runtimeconfig.json
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\bin\Debug\net10.0\P1-AlgoritmosBusqueda.dll
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\bin\Debug\net10.0\P1-AlgoritmosBusqueda.pdb
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\P1-AlgoritmosBusqueda.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\P1-AlgoritmosBusqueda.AssemblyInfoInputs.cache
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\P1-AlgoritmosBusqueda.AssemblyInfo.cs
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\P1-AlgoritmosBusqueda.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\P1-AlgoritmosBusqueda.sourcelink.json
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\P1-AlgoritmosBusqueda.dll
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\refint\P1-AlgoritmosBusqueda.dll
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\P1-AlgoritmosBusqueda.pdb
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\P1-AlgoritmosBusqueda.genruntimeconfig.cache
+C:\Users\Usuario\Desktop\2nd curso repo\2do_2cuatri_p\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\Debug\net10.0\ref\P1-AlgoritmosBusqueda.dll
