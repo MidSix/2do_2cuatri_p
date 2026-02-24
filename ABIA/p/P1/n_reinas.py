@@ -24,7 +24,7 @@ class Solucion:#clase solucion que hace override de metodos magicos, no se como 
         return '-'.join(str(x) for x in self.coords)
 
 
-class ListaCandidatos:#Una lista estandar, ya la implementamos en el TGR1
+class ListaCandidatos:#Una clase abstracta
 
     def anhadir(self, solucion, prioridad=0):
         pass
@@ -39,7 +39,7 @@ class ListaCandidatos:#Una lista estandar, ya la implementamos en el TGR1
         pass
 
 
-class ColaDePrioridad(ListaCandidatos):#Cola de prioridad a partir de una lista de candidatos??
+class ColaDePrioridad(ListaCandidatos):#Cola de prioridad, usando la interfaz de ListaCandidatos
 
     def __init__(self):
         self.cp = []# crea una lista y un diccionario
