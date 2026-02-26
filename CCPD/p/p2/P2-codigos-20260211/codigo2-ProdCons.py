@@ -28,7 +28,7 @@ SLEEP_TIME = 0.25 # Tiempo de espera para consumir un item, en segundos
 
 PADDING = "\t\t\t\t\t\t\t\t"
 
-ITEMS_TO_CONSUME = 50
+ITEMS_TO_CONSUME = 11
 ITEMS_CONSUMED = False
 
 def producer_notify(s):

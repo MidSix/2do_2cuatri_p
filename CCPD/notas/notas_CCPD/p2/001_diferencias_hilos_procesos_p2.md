@@ -39,3 +39,11 @@ El `codigo0-ProcesosVsHilos.py` ilustra estas diferencias:
 *   **Escenario 3 (Procesos con memoria compartida explícita):** Los procesos hijos pueden compartir la misma variable si se configura explícitamente una región de memoria compartida.
 
 Esta práctica enfatiza que la gestión de variables compartidas es una consideración crítica al diseñar programas concurrentes con hilos.
+- Ejemplo de ejecución de la tarea 1 para el código 0.
+-> **Entity:** No es mas que el PID(Process ID) del proceso. Recalco que del proceso.
+	fíjate que los hilos al vivir dentro de un proceso cuando se busca el PID de ellos te devolverá el PID del proceso que los alberga.
+-> Cada "-------------" Significa que los 2 procesos o hilos ya modificaron la variable global. Y este
+	proceso se lleva a cabo tantas veces como entidades(procesos o hilos) haya. En el código del profesor hay 2 entidades, por eso se llevan a cabo 2 iteraciones donde en cada una, las 2 entidades de forma secuencial modifican la variable global.
+
+![[Pasted image 20260225111531.png]]
+

@@ -1,4 +1,7 @@
 import argparse
+
+MODULE_NAME = "mg.py"
+
 def mg_int(n:int)->bool:
     x=0
     y=1
@@ -60,3 +63,6 @@ if __name__ == "__main__":
         mg_int(args.n)
     elif args.s is not None:
         mg_str(args.s)
+    else:
+        print(f"\nUso:\npython {MODULE_NAME} -n <An integer for the accumulator>\n"
+        f'or\npython {MODULE_NAME} -s <string to check, example: "mg" or "∼m∼g">\n')

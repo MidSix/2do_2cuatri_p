@@ -142,11 +142,10 @@ def regla4(curr: str,candidates: list[str], limit:int):
                 else:
                     break
 
-def main(limit: int) -> None:
+def generate_MIU_theorems(limit: int) -> None:
     theorems = ["MI"]
     seen = {"MI"}
     current_idx = 0
-
     # Bucle principal de generación
     while len(theorems) < limit:
         if current_idx >= len(theorems):
@@ -187,7 +186,10 @@ def main(limit: int) -> None:
 
         if args.a is not None:
             # Si nos da igual la posibilidad de
-            # teoremas repetidos simplemente concatenamos
+            # teoremas repetidos simplemente agregamos uno a uno
+            # los teoremas de candidates a theorems y deteniendo esta
+            # operacion inmediatamente si llegamos al limite de
+            # teoremas que el usuario esta pidiendo.
             for new_t in candidates:
                 # Si ya tenemos suficientes, paramos inmediatamente
                 if len(theorems) >= limit:
@@ -223,6 +225,40 @@ def main(limit: int) -> None:
     for t in theorems:
         print(t)
 
+def is_a_MIU_thorem(theorem: str):
+    """
+    Procedimiento de decisión del sistema MIU.
+    Cabe aclarar que un procedimiento de dicision es una serie de pasos
+    que permitin "decidir" si un teorema dado pertenece o no a un
+    sistema/lenguaje formal. Por lo tanto esta funcion se usa
+    para determinar si una cadena es un teorema válido del sistema
+    formal MIU o no.
+    """
+    # El axioma base empieza por M, y ninguna regla añade o quita M.
+    # Por tanto, debe tener exactamente una 'M' y estar al principio.
+    # ambos metodos str son self-explanatory.
+    if not theorem.startswith('M') or theorem.count('M') != 1:
+        return False
+
+    # Los simbolos con los que cuente el teorema deben ser parte
+    # del abecedario del lenguaje formal MIU, de no serlo, el teorema
+    # dado no podra inferirse usando este lenguaje porque al menos uno
+    # de los simbolos de los que se compone el teorema no existen en el
+    # lenguaje.
+    for char in theorem:
+        if char not in ('M', 'I', 'U'):
+            return False
+
+    # Comprobación de la invariante. Si esto varia, entonces no puede
+    # ser un teorema del lenguaje.
+    # El número de 'I's no puede ser congruente(igual a cero en modulo 3)
+    # con 0 (módulo 3).
+    num_i = theorem.count('I')
+    if num_i % 3 == 0:
+        return False
+
+    return True
+
 if __name__ == "__main__":
     #$ python miu -a n:int or $ python miu -u n:int
     parser = argparse.ArgumentParser(
@@ -236,11 +272,21 @@ if __name__ == "__main__":
     parser.add_argument('-u', type=int,
                         help='With this flag calculate n UNIQUE theorems'
                         )
+    parser.add_argument('-s', type=str,
+                        help='With this flag evaluate wether a given' \
+                        'theorem is part of the MIU formal language or not.'
+    )
     args = parser.parse_args()
+
     if args.a is not None:
-        main(args.a)
+        generate_MIU_theorems(args.a)
     elif args.u is not None:
-        main(args.u)
+        generate_MIU_theorems(args.u)
+    elif args.s is not None:
+        res = is_a_MIU_thorem(args.s)
+        print(f"El bool indica si forma parte o no del lenguaje.\n"
+              f"Si es True -> forma parte, Si es False -> NO forma parte\n\n"
+              f"respuesta = {res}")
     else:
         print(f"\nUso:\npython {MODULE_NAME} -a <num_theorems>\n"
         f"or\npython {MODULE_NAME} -u <num_theorems> -> for UNIQUE theorems\n")

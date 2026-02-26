@@ -6,12 +6,12 @@ Esta nota clarifica las diferencias fundamentales entre las palabras clave `abst
 
 ## 1. Tabla Comparativa Rápida
 
-| Característica         | Clase Abstracta                                   | Clase Estática                                      |
-| :--------------------- | :------------------------------------------------ | :-------------------------------------------------- |
-| **¿Se puede instanciar?** | No                                                | No                                                  |
-| **¿Se puede heredar?** | Sí (diseñada para ser heredada)                   | No                                                  |
-| **Propósito Principal**| Definir una plantilla/contrato para subclases.    | Agrupar funcionalidades de utilidad sin estado.     |
-| **Contenido**          | Métodos abstractos y concretos, propiedades.      | Sólo miembros estáticos (métodos, propiedades, campos). |
+| Característica            | Clase Abstracta                                | Clase Estática                                          |
+| :------------------------ | :--------------------------------------------- | :------------------------------------------------------ |
+| **¿Se puede instanciar?** | No                                             | No                                                      |
+| **¿Se puede heredar?**    | Sí (diseñada para ser heredada)                | No                                                      |
+| **Propósito Principal**   | Definir una plantilla/contrato para subclases. | Agrupar funcionalidades de utilidad sin estado.         |
+| **Contenido**             | Métodos abstractos y concretos, propiedades.   | Sólo miembros estáticos (métodos, propiedades, campos). |
 
 ---
 
@@ -70,6 +70,9 @@ Esta nota clarifica las diferencias fundamentales entre las palabras clave `abst
 ---
 
 ## 3. Clases y Métodos Estáticos
+
+> A diferencia de las clases abstractas que Sí existen en python. Las clases estáticas NO existen en **python**. SOLO existen métodos estáticos pero no clases.
+
 
 *   **Propósito:** Las clases y métodos estáticos agrupan funcionalidades que no necesitan un estado de instancia para operar. Son útiles para funciones de utilidad, helpers, o configuraciones globales.
 

@@ -41,7 +41,14 @@ class CountContainer(object):
         self.__count_access.release()
 
     def add_to_count(self, x, n):
-        time.sleep(random.randint(0, MAX_WAIT_TIME_MS) / 1000)
+        # dividido 1000 porque son milisegundos.
+        # NO SIEMPRE espera 200 milisegundos entre cada
+        # vez que se suma 1, sino que se toman valores random
+        # entre el max y min, por media estadistica suele caer
+        # muchas mas veces valores cercanos a la media. Por eso
+        # veras como pareciera que el tiempo de espera tiende a ser
+        # algo parecido a MAX_WAIT_TIME_MS / 2.
+        time.sleep(random.randint(0,MAX_WAIT_TIME_MS) / 1000)
         x += n
         return x
 
@@ -56,11 +63,13 @@ def unsafe(count, n):
 
 def safe(count, n):
     while n > 0:
-        count.lock_count()
+        count.lock_count()  #LOCK ACQ. Si otro hilo lleva el LOCK a 0
+        # entonces el hilo que hace LOCK ACQ espera en esta linea hasta
+        # que el otro haga LOCK FREE.
         c = count.get_count()
         c = count.add_to_count(c, 1)
         count.set_count(c)
-        count.unlock_count()
+        count.unlock_count() #LOCK FREE
         n -= 1
 
 
@@ -125,7 +134,7 @@ if __name__ == '__main__':
     all_counts = list()
     TO_BE_ADDED = int(2e2)
     MAX_WAIT_TIME_MS = 200
-    N_THREADS = 20
+    N_THREADS = 10
     try:
         run_experiment(functs)
     except KeyboardInterrupt:
