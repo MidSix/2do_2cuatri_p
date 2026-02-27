@@ -6,7 +6,8 @@ Grupo de prácticas:
     G1.1 - jueves.
 */
 using n_reinas;
-public class Ejecucion
+namespace Semana_1{
+public class Ejecucion1
 {
     public int CalculoCoste(Solucion actual, Solucion vecino)//Función que calcula el coste incremental entre dos estados consecutivos. En este caso, se asume un coste uniforme de 1 para cada movimiento.
     {
@@ -61,7 +62,7 @@ public class Ejecucion
         }
         return true;
     }
-    public static void Main()
+    public static void Semana1()
     {
         int reinas = 4;
         var solucion_inicial_coords = new List<Tuple<int, int>>();
@@ -70,7 +71,7 @@ public class Ejecucion
             solucion_inicial_coords.Add(new Tuple<int, int>(0, i));
         }
 
-        var ejec = new Ejecucion();
+        var ejec = new Ejecucion1();
         var solucionInicial = new Solucion(0, solucion_inicial_coords);
 
         AEstrella astar = new AEstrella();
@@ -80,4 +81,5 @@ public class Ejecucion
         Console.WriteLine($"Número de nodos expandidos: {revisados}");
     }
 
+}
 }
