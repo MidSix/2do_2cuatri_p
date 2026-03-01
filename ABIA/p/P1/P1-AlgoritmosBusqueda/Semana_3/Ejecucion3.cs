@@ -1,14 +1,43 @@
+/*
+Miembros:
+    - Xoel Sánchez Dacoba
+    - Sebastián David Moreno Expósito
+Grupo de prácticas:
+    G1.1 - jueves.
+*/
 using n_reinas;
 public class Ejecucion3
 {
-    public int CalculoCoste(Solucion actual, Solucion vecino)//Función que calcula el coste incremental entre dos estados consecutivos. En este caso, se asume un coste uniforme de 1 para cada movimiento.
+    public int CalculoCoste(Solucion actual, Solucion vecino)
     {
         return 1; 
     }
-    public int CalculoHeuristica(Solucion actual)//Funcion que no se utiliza en este caso, pero es necesaria para la firma del método de búsqueda. En A* se usaría para estimar el coste restante hasta la meta.
+    public int CalculoHeuristica(Solucion actual)
     {
         return 0; 
     }
+    public int HeuristicaAvara(Solucion solucion)
+{
+    int conflictos = 0;
+    int n = solucion.Coords?.Count ?? 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            var r1 = solucion.Coords![i];
+            var r2 = solucion.Coords![j];
+
+            if (r1.Item1 == r2.Item1 || // Comprobamos si se atacan (Misma Fila, Columna o Diagonal)
+                r1.Item2 == r2.Item2 || 
+                Math.Abs(r1.Item1 - r2.Item1) == Math.Abs(r1.Item2 - r2.Item2))
+            {
+                conflictos++;
+            }
+        }
+    }
+    return conflictos;
+}
     public List<Solucion> GenerarVecinos(Solucion actual)
     {
         var vecinos = new List<Solucion>();
@@ -60,7 +89,7 @@ public class Ejecucion3
         var ejec = new Ejecucion3();
         AEstrella astar = new AEstrella();
         int revisados = 0; 
-
+        Console.WriteLine("Ejecución Búsqueda A*:");
         while (revisados < 15000)
         {
             reinas++; 
@@ -76,10 +105,31 @@ public class Ejecucion3
 
             (_, revisados) = astar.Busqueda(solucionInicial, ejec.CriterioParada, ejec.GenerarVecinos, ejec.CalculoCoste, ejec.CalculoHeuristica);
 
-            Console.WriteLine($"Reinas: {reinas} \t| Nodos expandidos: {revisados}");
+            Console.WriteLine($"(BúsquedaAStar)Reinas: {reinas} \t| Nodos expandidos: {revisados}");
         }
         
-        Console.WriteLine("Límite de 15000 cómputo alcanzado");
+        Console.WriteLine("Límite de 15000 alcanzado");
+        reinas=3;
+        var ejec2 = new Ejecucion3();
+        BusquedaAvara avara = new BusquedaAvara();
+        Console.WriteLine("Ejecución Búsqueda Avara:");
+        while (revisados < 15000)
+        {
+            reinas++;
+            
+            var solucion_inicial_coords = new List<Tuple<int, int>>();
+            for (int i = 0; i < reinas; i++)
+            {
+                solucion_inicial_coords.Add(new Tuple<int, int>(0, i));
+            }
+            var solucionInicial = new Solucion(0, solucion_inicial_coords);
+
+            (_, revisados) = avara.Busqueda(solucionInicial, ejec2.CriterioParada, ejec2.GenerarVecinos, ejec2.CalculoCoste, ejec2.HeuristicaAvara);
+
+            Console.WriteLine($"(BúsquedaAvara)Reinas: {reinas} \t| Nodos expandidos: {revisados}");
+        }
+        
+        Console.WriteLine("Límite de 15000 alcanzado");
     }
     
 }
