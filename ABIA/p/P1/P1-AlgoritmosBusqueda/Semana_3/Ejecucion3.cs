@@ -16,28 +16,7 @@ public class Ejecucion3
     {
         return 0; 
     }
-    public int HeuristicaAvara(Solucion solucion)
-{
-    int conflictos = 0;
-    int n = solucion.Coords?.Count ?? 0;
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            var r1 = solucion.Coords![i];
-            var r2 = solucion.Coords![j];
-
-            if (r1.Item1 == r2.Item1 || // Comprobamos si se atacan (Misma Fila, Columna o Diagonal)
-                r1.Item2 == r2.Item2 || 
-                Math.Abs(r1.Item1 - r2.Item1) == Math.Abs(r1.Item2 - r2.Item2))
-            {
-                conflictos++;
-            }
-        }
-    }
-    return conflictos;
-}
+    
     public List<Solucion> GenerarVecinos(Solucion actual)
     {
         var vecinos = new List<Solucion>();
@@ -124,7 +103,7 @@ public class Ejecucion3
             }
             var solucionInicial = new Solucion(0, solucion_inicial_coords);
 
-            (_, revisados) = avara.Busqueda(solucionInicial, ejec2.CriterioParada, ejec2.GenerarVecinos, ejec2.CalculoCoste, ejec2.HeuristicaAvara);
+            (_, revisados) = avara.Busqueda(solucionInicial, ejec2.CriterioParada, ejec2.GenerarVecinos, ejec2.CalculoCoste, avara.HeuristicaAvara);
 
             Console.WriteLine($"(BúsquedaAvara)Reinas: {reinas} \t| Nodos expandidos: {revisados}");
         }

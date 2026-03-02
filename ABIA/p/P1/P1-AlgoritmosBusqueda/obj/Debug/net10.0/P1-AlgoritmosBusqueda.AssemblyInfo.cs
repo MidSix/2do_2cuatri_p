@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("P1-AlgoritmosBusqueda")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82bfdcc391bcb0a24fda448c8d2b3da2834fb158")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f32a987810e9fba9172924d76154572911d43d05")]
 [assembly: System.Reflection.AssemblyProductAttribute("P1-AlgoritmosBusqueda")]
 [assembly: System.Reflection.AssemblyTitleAttribute("P1-AlgoritmosBusqueda")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
