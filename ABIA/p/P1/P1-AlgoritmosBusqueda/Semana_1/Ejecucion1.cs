@@ -6,7 +6,7 @@ Grupo de prácticas:
     G1.1 - jueves.
 */
 using n_reinas;
-namespace Semana_1{
+namespace Ejecuciones{
 public class Ejecucion1
 {
     public int CalculoCoste(Solucion actual, Solucion vecino)//Función que calcula el coste incremental entre dos estados consecutivos. En este caso, se asume un coste uniforme de 1 para cada movimiento.

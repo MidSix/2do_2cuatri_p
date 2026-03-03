@@ -6,15 +6,37 @@ Grupo de prácticas:
     G1.1 - jueves.
 */
 using n_reinas;
+namespace Ejecuciones{
+//Igual reutilizo algo de código aqui, pero me parece mejor tenerlo algunas cosas a la vista
+//en el mismo archivo, para no tener que ir a buscarlo a otro lado.
 public class Ejecucion3
 {
     public int CalculoCoste(Solucion actual, Solucion vecino)
     {
+
         return 1; 
     }
-    public int CalculoHeuristica(Solucion actual)
+    public int CalculoHeuristica(Solucion solucion)
     {
-        return 0; 
+    int conflictos = 0;
+    int n = solucion.Coords?.Count ?? 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            var r1 = solucion.Coords![i];
+            var r2 = solucion.Coords![j];
+
+            if (r1.Item1 == r2.Item1 || // Comprobamos si se atacan (Misma Fila, Columna o Diagonal)
+                r1.Item2 == r2.Item2 || 
+                Math.Abs(r1.Item1 - r2.Item1) == Math.Abs(r1.Item2 - r2.Item2))
+            {
+                conflictos++;
+            }
+        }
+    }
+        return conflictos;
     }
     
     public List<Solucion> GenerarVecinos(Solucion actual)
@@ -66,11 +88,11 @@ public class Ejecucion3
     {
         int reinas = 3; // Empezamos en 3 para que la primera iteración pruebe con 4
         var ejec = new Ejecucion3();
-        AEstrella astar = new AEstrella();
         int revisados = 0; 
         Console.WriteLine("Ejecución Búsqueda A*:");
         while (revisados < 15000)
         {
+            AEstrella astar = new AEstrella();
             reinas++; 
 
 
@@ -89,11 +111,12 @@ public class Ejecucion3
         
         Console.WriteLine("Límite de 15000 alcanzado");
         reinas=3;
+        revisados=0;
         var ejec2 = new Ejecucion3();
-        BusquedaAvara avara = new BusquedaAvara();
         Console.WriteLine("Ejecución Búsqueda Avara:");
         while (revisados < 15000)
         {
+            BusquedaAvara avara = new BusquedaAvara();
             reinas++;
             
             var solucion_inicial_coords = new List<Tuple<int, int>>();
@@ -103,7 +126,7 @@ public class Ejecucion3
             }
             var solucionInicial = new Solucion(0, solucion_inicial_coords);
 
-            (_, revisados) = avara.Busqueda(solucionInicial, ejec2.CriterioParada, ejec2.GenerarVecinos, ejec2.CalculoCoste, avara.HeuristicaAvara);
+            (_, revisados) = avara.Busqueda(solucionInicial, ejec2.CriterioParada, ejec2.GenerarVecinos, ejec2.CalculoCoste, ejec2.CalculoHeuristica);
 
             Console.WriteLine($"(BúsquedaAvara)Reinas: {reinas} \t| Nodos expandidos: {revisados}");
         }
@@ -111,4 +134,5 @@ public class Ejecucion3
         Console.WriteLine("Límite de 15000 alcanzado");
     }
     
+}
 }

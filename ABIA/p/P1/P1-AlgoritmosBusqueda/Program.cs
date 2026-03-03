@@ -5,6 +5,7 @@ Miembros:
 Grupo de prácticas:
     G1.1 - jueves.
 */
+using Ejecuciones;
 string exerciseMenu =
         @"¿Que ejercicio desea realizar?
         1) Ejercicio 1
@@ -25,7 +26,7 @@ string exerciseMenu =
                 {
                     if(selectExercise == 1)
                     {
-                        Semana_1.Ejecucion1.Semana1();
+                        Ejecucion1.Semana1();
                     }
                     else if(selectExercise == 2)
                     {
@@ -33,7 +34,7 @@ string exerciseMenu =
                     }
                     else if(selectExercise == 3)
                     {
-                        //semana_3.Ejecucion3.Semana3();
+                        Ejecucion3.Semana3();
 
                     }
                     else{}

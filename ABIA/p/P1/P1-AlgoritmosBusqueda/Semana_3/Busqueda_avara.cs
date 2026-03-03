@@ -6,6 +6,8 @@ Grupo de prácticas:
     G1.1 - jueves.
 */
 using n_reinas;
+//Uso esa clase para hacer override del calculo de prioridad, ya que el algoritmo A*
+// con heurística avara solo se basa en la heurística para decidir qué nodo expandir.
 public class BusquedaAvara : AlgoritmoDeBusqueda
 {/* 
 Implementación de la búsqueda A* con heurística avara se trata de una búsqueda 
@@ -30,26 +32,5 @@ de conflictos entre las reinas.
         return heur?.Invoke(solucion) ?? 0; // Ignoramos el coste acumulado.
 
     }
-    public int HeuristicaAvara(Solucion solucion)
-    {
-    int conflictos = 0;
-    int n = solucion.Coords?.Count ?? 0;
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            var r1 = solucion.Coords![i];
-            var r2 = solucion.Coords![j];
-
-            if (r1.Item1 == r2.Item1 || // Comprobamos si se atacan (Misma Fila, Columna o Diagonal)
-                r1.Item2 == r2.Item2 || 
-                Math.Abs(r1.Item1 - r2.Item1) == Math.Abs(r1.Item2 - r2.Item2))
-            {
-                conflictos++;
-            }
-        }
-    }
-        return conflictos;
-    }
+    
 }
