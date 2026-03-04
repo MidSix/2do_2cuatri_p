@@ -5,6 +5,7 @@ Miembros:
 Grupo de prácticas:
     G1.1 - jueves.
 */
+
 namespace n_reinas
 {   
 public class AlgoritmoDeBusqueda
@@ -54,7 +55,7 @@ public class AlgoritmoDeBusqueda
             // CRITERIO DE FINALIZACIÓN: Si se cumple el criterio de parada, hemos encontrado la meta
             if (criterioParada(solucion))
             {
-                finalizado = true;
+                finalizado = True;
                 solucionEncontrada = solucion;
                 break;
             }

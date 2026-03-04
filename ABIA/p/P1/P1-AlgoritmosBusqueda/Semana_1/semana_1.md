@@ -1,6 +1,6 @@
 # Práctica: Algoritmos de Búsqueda - Problema de las N-Reinas (C#)
 
-**Asignatura:** Inteligencia Artificial / Programación
+**Asignatura:** ABIA (Algoritmos Básicos de la Inteligencia Artificial)
 **Grupo:** G1.1 - Jueves
 **Autores:**
 * Xoel Sánchez Dacoba
@@ -10,9 +10,9 @@
 
 ## 1. Introducción y Objetivos
 
-El objetivo principal de esta práctica ha sido la implementación de un motor de búsqueda en el espacio de estados para resolver el problema de las **N-Reinas**, migrando la lógica original desde **Python** a **C# (.NET)**.
+El objetivo principal de esta práctica ha sido la implementación de un motor de búsqueda en el espacio de estados(conjunto de todas las posibles posiciones en las que que se pueden colocar n reinas en un tablero nxn) tal que dicho motor de búsqueda encuentre aquellos estados que satisfagan la premisa del problema de las **N-Reinas**, migrando la lógica original desde **Python** a **C# (.NET)**.
 
-El reto técnico consistió en adaptar un código basado en tipado dinámico y "métodos mágicos" de Python a un lenguaje fuertemente tipado como C#, haciendo uso de estructuras de datos eficientes, interfaces y delegados.
+El reto técnico consistió en adaptar un código basado en tipado dinámico y "métodos mágicos" de Python a un lenguaje fuertemente tipado como C#, haciendo uso de estructuras de datos eficientes, interfaces(para heredar métodos) y delegados.
 
 ## 2. Estructura del Proyecto
 

@@ -8,7 +8,7 @@ import heapq
 REMOVED = '<removed-task>'  # placeholder for a removed task
 
 
-class Solucion:#clase solucion que hace override de metodos magicos, no se como se hace en C#
+class Solucion:
 
     def __init__(self, coords, coste=0):
         self.coords = coords
@@ -24,15 +24,8 @@ class Solucion:#clase solucion que hace override de metodos magicos, no se como 
         return '-'.join(str(x) for x in self.coords)
 
 
-class ListaCandidatos:#Una clase abstracta
-# Se espera usar esta clase como una clase abstracta
-# sin embargo estrictamente hablando no lo es 
-# para que lo fuese tendria que heredar de la clase abstracta "ABC" de la libreria "abc"
-# y declarar los metodos abstractos con los decoradores "@abstractmethod"
-# por que esto importa? Pues porque sin hacer eso esta
-# clase es instanciable y se puede comprobar, sin embargo
-# por definicion una clase abstracta no puede ser instancible
-# en caso de serlo -> No es abstracta. 
+class ListaCandidatos:
+
     def anhadir(self, solucion, prioridad=0):
         pass
 
@@ -46,10 +39,10 @@ class ListaCandidatos:#Una clase abstracta
         pass
 
 
-class ColaDePrioridad(ListaCandidatos):#Cola de prioridad, usando la interfaz de ListaCandidatos
+class ColaDePrioridad(ListaCandidatos):
 
     def __init__(self):
-        self.cp = []# crea una lista y un diccionario
+        self.cp = []
         self.buscador = {}
 
     def anhadir(self, solucion, prioridad=0):
