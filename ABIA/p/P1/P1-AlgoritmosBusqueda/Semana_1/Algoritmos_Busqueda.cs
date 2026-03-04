@@ -5,7 +5,6 @@ Miembros:
 Grupo de prácticas:
     G1.1 - jueves.
 */
-
 namespace n_reinas
 {   
 public class AlgoritmoDeBusqueda
@@ -55,7 +54,7 @@ public class AlgoritmoDeBusqueda
             // CRITERIO DE FINALIZACIÓN: Si se cumple el criterio de parada, hemos encontrado la meta
             if (criterioParada(solucion))
             {
-                finalizado = True;
+                finalizado = true;
                 solucionEncontrada = solucion;
                 break;
             }
@@ -68,6 +67,7 @@ public class AlgoritmoDeBusqueda
 
                 // Solo procesa vecinos no visitados (evita ciclos)
                 if (!vistos.ContainsKey(nueva_solucion.ToString()))
+                //Este condicional es fundamental.
                 {
                     // Calcula el coste acumulado y añade a candidatos con su prioridad
                     nueva_solucion.Coste = solucion.Coste + calculoCoste(solucion, nueva_solucion);
