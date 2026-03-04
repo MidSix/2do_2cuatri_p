@@ -1,0 +1,68 @@
+import argparse
+
+MODULE_NAME = "mg.py"
+
+def mg_int(n:int)->bool:
+    x=0
+    y=1
+    z=1
+    prints=0
+    while prints<n:
+        print((x*"∼")+"m"+(y*"∼")+"g"+(z*"∼"))
+        prints+=1
+        if y==1:
+            z+=1
+            y=z
+            x=0
+        else:
+            x+=1
+            y-=1
+    return True
+
+# Se cambio el type-hint del return ya que las funciones print
+# no retornan nada, solo imprimen en pantalla
+def mg_str(chain:str) -> None: #Apartado opcional, este era chill
+    chain=chain.replace(" ","")#Entendemos que los espacios no cuentan, así que los eliminamos para facilitar cálculos posteriores
+    if chain=="mg":#Si la cadena es "mg", es correcta(Esto es para ahorrar cálculos posteriores, aunque no deberia ser necesario)
+        return print("Yes")
+    try:
+        indx_m=chain.index("m")
+        indx_g=chain.index("g")
+    except ValueError:
+        return print("No")
+
+    if ((indx_m>indx_g) #Si m aparece después de g, la cadena es incorrecta
+    or (chain.count("m")!=1 or chain.count("g")!=1)#Si hay más de una m o g, la cadena es incorrecta
+    or (chain.replace("m","").replace("g","").replace("∼","")!="")#Si hay algún caracter que no sea m, g o ∼, la cadena es incorrecta :#
+    ):
+        return print("No")
+    #Apartir de aquí, sabemos que la cadena es del tipo ∼^x m ∼^y g ∼^z, con x,y,z>=0, y que solo hay un m y un g
+
+    x=indx_m#Todo lo que hay antes de m son ∼
+    y=indx_g-(indx_m+1)#Todo lo que hay entre m y g son ∼
+    z=len(chain)-(indx_g+1)#Todo lo que hay después de g son ∼
+
+    if ((z==0 or y==0)#Es imposible obtener cadenas de con y=0 o z=0
+    or ((x>=z) or (y>z))#Si x es mayor o igual a z, es incorrecta, o si y es mayor que z, también lo es
+    or y==z and x!=0  #es imposible que x sea mayor que cero cuando y=z
+    ):
+        return print("No")
+
+    #Si se cumplen las condiciones anteriores, la cadena es correcta
+    return print("Yes")
+
+
+
+if __name__ == "__main__":
+    #$ python mg.py -n int or $ python mg.py -s string
+    parser = argparse.ArgumentParser(description="Process some integers.")
+    parser.add_argument('-n', type=int, help='An integer for the accumulator')
+    parser.add_argument('-s', type=str, help='A string to check, example: "mg" or "∼m∼g"')
+    args = parser.parse_args()
+    if args.n is not None:
+        mg_int(args.n)
+    elif args.s is not None:
+        mg_str(args.s)
+    else:
+        print(f"\nUso:\npython {MODULE_NAME} -n <An integer for the accumulator>\n"
+        f'or\npython {MODULE_NAME} -s <string to check, example: "mg" or "∼m∼g">\n')

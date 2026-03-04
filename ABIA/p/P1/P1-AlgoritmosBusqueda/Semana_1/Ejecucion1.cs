@@ -5,6 +5,7 @@ Miembros:
 Grupo de prácticas:
     G1.1 - jueves.
 */
+
 using n_reinas;
 namespace Ejecuciones{
 public class Ejecucion1

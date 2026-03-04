@@ -67,6 +67,7 @@ public class AlgoritmoDeBusqueda
 
                 // Solo procesa vecinos no visitados (evita ciclos)
                 if (!vistos.ContainsKey(nueva_solucion.ToString()))
+                //Este condicional es fundamental.
                 {
                     // Calcula el coste acumulado y añade a candidatos con su prioridad
                     nueva_solucion.Coste = solucion.Coste + calculoCoste(solucion, nueva_solucion);

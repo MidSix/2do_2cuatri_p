@@ -5,6 +5,7 @@ Miembros:
 Grupo de prácticas:
     G1.1 - jueves.
 */
+
 namespace n_reinas
 {
 public class Solucion(int coste, List<Tuple<int,int>>? coords)
@@ -13,7 +14,7 @@ public class Solucion(int coste, List<Tuple<int,int>>? coords)
     public List<Tuple<int,int>>? Coords { get; set; } = coords;
 
 
-    public override string ToString()//__str__
+    public override string ToString() //__str__
     {
         if (this.Coords != null)
         {

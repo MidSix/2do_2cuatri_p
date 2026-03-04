@@ -1,0 +1,35 @@
+/*
+Integrantes:
+ 	Xoel Sanchez Dacoba
+ 	Sebastian David Moreno Exposito
+*/
+
+cuestiones tarea 1 (q.py):
+-> con n = 10_000_000 y flag -qa ha demorado 259.25273340 s
+-> con n = 10_000_000 y flag -qu ha demorado mucho mucho mas
+
+Esto ocurre, en mayor medida, porque aunque tenemos el mismo numero n, la cantidad
+de iteraciones se ven aumentadas, ya no se itera una cantidad n de veces ya que
+muchas iteraciones no aumentan la variable "prints", esto nos lleva a que en el
+peor de los casos la complejidad > O(n), que seria la la complejidad que modela la cota superior que tiene la ejecución con la flag -qa. 
+
+cuestiones tarea 2 (mg.py):
+
+- Nada que responder.
+
+cuestiones tarea 3 (miu.py):
+
+¿Es posible obtener obtener la cadena "MU" a partir del axioma "MI"
+usando las 4 reglas de producción/inferencia descritas en el sistema formal MIU
+de Hofstadter?
+- No. No es posible.
+¿Por qué? Primero podemos pensarlo intuitivamente. NO pueden desaparecer por completo
+Las I's de los teoremas, si nos fijamos en las 4 reglas veremos como:
+
+1-> No cambia el numero de I's
+2-> Duplica el numero de I's
+3-> Reduce el numero de I's en 3 PERO cuando se cumple la regla, es decir, 3 I's consecutivas.
+4-> No cambia el numero de I's
+
+Ninguna de estas 4 reglas nos permite eliminar todas las I's (que las reglas
+desemboquen en que el resultado de I's modulo 3 -> 0). Nosotros empezamos con un numero de I's NO multiplo de 3, por ello da igual cuantas veces dupliquemos el numero de I's, jamas conseguiremos que dicho numero de I's (No un subconjunto sino el conjunto total de I's) sea multiplo de 3. Entonces nunca podremos eliminarlas todas, es decir, nunca podremos conseguir una cadena donde no haya ninguna I, por tanto no podemos conseguir la cadena/teorema MU.
