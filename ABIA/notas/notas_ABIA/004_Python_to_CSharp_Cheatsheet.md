@@ -176,7 +176,7 @@ public static int Suma(int a, int b)
 }
 ```
 
-### Funciones Flecha (Lambda Expressions)
+### Funciones Anonimas (Lambda Expressions)
 Similar a los one-liners de Julia o lambdas de Python.
 
 **C#:**

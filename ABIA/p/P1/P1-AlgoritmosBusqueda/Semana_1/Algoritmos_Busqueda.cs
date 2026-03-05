@@ -6,14 +6,24 @@ Grupo de prácticas:
     G1.1 - jueves.
 */
 namespace n_reinas
-{   
+{
 public class AlgoritmoDeBusqueda
 {
-    public IListaCandidatos? Lista { get; set; }
-    
+    public IListaCandidatos? Lista { get; set; } // Se declara Lista, pero no se inicializa aquí, sino en las clases hijas (BFS, DFS, A*).
+    // Uno de los principios de OOP: Composición.
+    // estamos diciendo que AlgoritmoDeBusqueda tiene un objeto de tipo IListaCandidatos.
+    // No es una relacion Es-UN(Herencia), sino una relacion Tiene-UN(Composición).
+
+    // Esta IListaCandidatos es una interfaz que luego es implementada(heredada)
+    // por TAD's concretos como Cola, Pila o ColaDePrioridad. Y a su vez
+    // AlgoritmoDeBusqueda es una clase que luego es heredada por algoritmos concretos como BFS, DFS o A*.
+    // donde en su constructor se le asigna a Lista un TAD concreto que implemente la firma de la interfaz
+    // como nosotros NO llamamos a AlgoritmoDeBusqueda directamente, sino a sus clases hijas,
+    // en ellas ya implementamos el constructor para asignar a Lista un TAD concreto, por lo que al llamar a Busqueda,
+    // tenemos comportamientos distintos -> Polimorfismo.
     public virtual int CalculoDePrioridad(object nodo_info, object? calculo_heuristica = null)
     {
-        return 0;  
+        return 0;
     }
 
     /// <summary>
@@ -83,6 +93,7 @@ public class AlgoritmoDeBusqueda
 /// Implementación concreta: Algoritmo A*
 public class AEstrella : AlgoritmoDeBusqueda
 {
+    // En el constructor de AEstrella, inicializamos la Lista como una ColaDePrioridad.
     public AEstrella()
     {
         // UTILIDAD DE ColaDePrioridad:
@@ -90,7 +101,7 @@ public class AEstrella : AlgoritmoDeBusqueda
         // - g(n) = coste acumulado desde inicio
         // - h(n) = heurística estimada al objetivo
         // - Permite exploración eficiente del espacio de búsqueda
-        Lista = new ColaDePrioridad(); 
+        Lista = new ColaDePrioridad();
     }
 
     /// Calcula f(n) = g(n) + h(n) para ordenar la cola de prioridad

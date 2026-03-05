@@ -1,5 +1,3 @@
-#
-#
 # Copyright © 2025 by Jonatan Enes (jonatan.enes@udc.es)
 # Computer Engineering department, Universidade da Coruña, Spain.
 #
@@ -50,7 +48,15 @@ def sci_not_str(num):
     else:
         return "{:1.0e}".format(num).replace("+0", "")
 
-
+# Operacion CPU-bond. Solo usa la ALU, no hace uso de operaciones de E/S, 
+# por lo que el tiempo de ejecución dependerá exclusivamente del rendimiento 
+# del procesador y no de otros factores como la velocidad del disco o la red. 
+# Es una operación que se puede paralelizar fácilmente, ya que cada item se 
+# puede calcular de forma independiente, sin necesidad de comunicación entre ellos.
+# Es de hecho la operacion que se usa para paralelizar en la practica.
+# tenemos un bucle que se ejecuta count veces, y en cada iteración se 
+# hace una operación que combina suma, multiplicación, división y módulo
+# sobre un numero "number" inicial.
 def evaluate_item(number, count):
     y = 0
     for i in range(0, count):
@@ -138,6 +144,7 @@ def run_experiment(measurements):
                     with PoolType(max_workers=workers_num) as executor:
                         futures = list()
                         for item in tasks_list:
+                            # Aqui se lanza al pool cada tarea, que se ejecutará en paralelo dependiendo del número de trabajadores y del tipo de pool
                             futures.append(executor.submit(evaluate_item, item, count))
                         result_items = list()
                         for f in futures:
@@ -220,23 +227,26 @@ if __name__ == "__main__":
     OUTPUT = True
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    print("VALIDITY TEST")
-    print("@@@@@@@@@@@@@@@@\n")
-    N_WORKERS_LIST = [2, 4]
-    NUM_TASKS = 5
-    COUNT_INI, COUNT_MAX = int(1e3), int(1e4)
-    print_config()
-    measurements, experiment_label = dict(), "vailidity_test"
-    try:
-        run_experiment(measurements)
-        run_experiment_proc_per_process(measurements)
-    except KeyboardInterrupt:
-        pass
-    print_as_pandas_df(measurements)
-    print("-" * 30 + "\n")
+
+    # print("VALIDITY TEST")
+    # print("@@@@@@@@@@@@@@@@\n")
+    # N_WORKERS_LIST = [2, 4]
+    # NUM_TASKS = 5
+    # COUNT_INI, COUNT_MAX = int(1e3), int(1e4)
+    # print_config()
+    # measurements, experiment_label = dict(), "vailidity_test"
+    # try:
+    #     run_experiment(measurements)
+    #     run_experiment_proc_per_process(measurements)
+    # except KeyboardInterrupt:
+    #     pass
+    # print_as_pandas_df(measurements)
+    # print("-" * 30 + "\n")
+  
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
     # NUM_TASKS = 2000
     # USE_THREADS = False
     # OUTPUT = False
@@ -254,10 +264,12 @@ if __name__ == "__main__":
     # print_as_pandas_df(measurements)
     # plot(measurements, experiment_label)
     # print("-" * 30 + "\n")
+   
     # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #
     #
     # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     # print("EFFECT OF GIL")
     # print("@@@@@@@@@@@@@@@@\n")
     # N_WORKERS_LIST = [2, 4, 6, 8]
@@ -274,9 +286,11 @@ if __name__ == "__main__":
     # print_as_pandas_df(measurements)
     # plot(measurements, experiment_label)
     # print("-" * 30 + "\n")
+
     # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #
     # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     # NUM_TASKS = 4
     # N_WORKERS_LIST = [2, 3, 4, 5, 6]
     # print("NUM TASKS ({0}) SMALLER THAN POOL ({1})".format(NUM_TASKS, max(N_WORKERS_LIST)))
@@ -293,24 +307,27 @@ if __name__ == "__main__":
     # print_as_pandas_df(measurements)
     # plot(measurements, experiment_label)
     # print("-" * 30 + "\n")
+
     # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # print("TRUE PARALLELISM")
-    # print("@@@@@@@@@@@@@@@@\n")
-    # USE_THREADS = False
-    # OUTPUT = False
-    # NUM_TASKS = 64  # For MR set 256
-    # N_WORKERS_LIST = [2, 4, 8, 16, 24, 32, 64]  # For MR add 128, 256
-    # COUNT_INI, COUNT_MAX = int(1e2), int(1e6)  # For MR increase to 1e7
-    # print_config()
-    # measurements, experiment_label = dict(), "true_parallelism"
-    # try:
-    #     run_experiment(measurements)
-    # except KeyboardInterrupt:
-    #     pass
-    # print_as_pandas_df(measurements)
-    # plot(measurements, experiment_label)
-    # print("-" * 30 + "\n")
+
+    print("TRUE PARALLELISM")
+    print("@@@@@@@@@@@@@@@@\n")
+    USE_THREADS = False
+    OUTPUT = False
+    NUM_TASKS = 64  # For MR set 256
+    N_WORKERS_LIST = [2, 4, 8, 16, 24, 32, 64]  # For MR add 128, 256
+    COUNT_INI, COUNT_MAX = int(1e2), int(1e6)  # For MR increase to 1e7
+    print_config()
+    measurements, experiment_label = dict(), "true_parallelism"
+    try:
+        run_experiment(measurements)
+    except KeyboardInterrupt:
+        pass
+    print_as_pandas_df(measurements)
+    plot(measurements, experiment_label)
+    print("-" * 30 + "\n")
+    
     # # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     

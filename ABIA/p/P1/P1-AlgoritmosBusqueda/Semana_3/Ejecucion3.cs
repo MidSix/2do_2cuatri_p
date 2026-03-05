@@ -13,7 +13,6 @@ public class Ejecucion3
 {
     public int CalculoCoste(Solucion actual, Solucion vecino)
     {
-
         return 1; 
     }
     public int CalculoHeuristica(Solucion solucion)
@@ -84,6 +83,8 @@ public class Ejecucion3
         }
         return true;
     }
+    
+    //----------------------------------------------------------------------------------------------------------------------------
     public static void Semana3()
     {
         int reinas = 3; // Empezamos en 3 para que la primera iteración pruebe con 4

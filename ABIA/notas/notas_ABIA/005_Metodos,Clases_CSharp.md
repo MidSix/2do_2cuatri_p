@@ -19,14 +19,14 @@ Define el **Modificador de Acceso**. Es decir, ¿quién tiene permiso para ver y
 
 * `internal`: Acceso parcial. Cualquier parte de tu programa puede llamar a este codigo(clase/funcion) SIEMPRE que formen parte del mismo proyecto, es decir, que su .csproj sea el mismo, o sea, que se encuentren en el mismo path (O que se estableza alguna excepcion a proyectos especificos como InternalsVisibleTo).
 
-*   **`private`**: Acceso restringido. Solo se puede usar dentro de la misma clase donde fue creada. PERO, las clases no pueden ser private, solo los metodos (basicamente porque si haces que una )
+*   **`private`**: Acceso restringido. Solo se puede usar dentro de la misma clase donde fue creada. PERO, las clases de primer nivel no pueden ser private, las anidadas sí que pueden serlo y por supuesto también los métodos (básicamente porque si haces que una clase de primer nivel private **esta no podrá ser instanciada en ningún sitio volviéndola inútil.** Por que? Pues porque el modificador de acceso private establece que )
 
 ### **Amplicacion:**
 #### 1.1. La Regla de Contención (Restricción de Nivel)
 
-El nivel de acceso de un miembro (método, propiedad, campo) no puede ser superior al nivel de acceso de la clase que lo contiene (No porque no lo puedes programar de  esa forma sino porque el compilador lo ignorara si lo haces, pero no te saltara ningun error de sintaxis ni nada por el estilo).
+El nivel de acceso de un miembro (método, propiedad, campo) no puede ser superior al nivel de acceso de la clase que lo contiene (No porque no lo puedes programar de  esa forma sino porque el compilador lo ignorara si lo haces, pero no te saltara ningún error de sintaxis ni nada por el estilo).
 
-- Si una clase se define como `internal`, el compilador trata a todos sus miembros `public` como si fueran `internal` para cualquier entidad fuera del proyecto, es decir, que aunque sean publics un proyecto ajeno no podra acceder a ellos ya que su acceso esta condicionado primero a que la clase sea accesible y si esta no es accesible automaticamente sus metodos tampoco lo son.
+- Si una clase se define como `internal`, el compilador trata a todos sus miembros `public` como si fueran `internal` para cualquier entidad fuera del proyecto, es decir, que aunque sean publics un proyecto ajeno no podrá acceder a ellos ya que su acceso esta condicionado primero a que la clase sea accesible y si esta no es accesible automáticamente sus métodos tampoco lo son.
 - Declarar un método `public` dentro de una clase `internal` no otorga visibilidad externa; solo define el comportamiento del miembro si la clase llegara a cambiar a `public` en el futuro.
 
 #### 1.2. Comportamiento de Modificadores en Clases
@@ -51,6 +51,9 @@ Este atributo de ensamblado altera la frontera del modificador `internal`:
 
 ---
 ### Matriz de Accesibilidad Final
+
+>La visibilidad de los métodos esta condicionada a la visibilidad de las clases 
+	-> `O maigos` se quiere referir al efecto de `InternalsVisibleTo` Que permite establecer excepciones.
 
 | **Modificador**       | **Clase internal**                                           | **Clase public**                           |
 | --------------------- | ------------------------------------------------------------ | ------------------------------------------ |
@@ -92,6 +95,9 @@ public static void Saludar()
 *   **`static`**: Se usa llamando a la clase, no hace falta un objeto.
 *   **`void`**: Solo imprime, no devuelve datos.
 *   **`Saludar`**: Es el nombre que le hemos dado.
+
+> Todo método C# tiene la forma:
+> `modificador_acceso static(optional) tipo_retorno NombreMetodo(tipo_parametro parametro ...)`
 
 **Relacionado:**
 *   [[004_Python_to_CSharp_Cheatsheet|Python to C# Cheatsheet]]

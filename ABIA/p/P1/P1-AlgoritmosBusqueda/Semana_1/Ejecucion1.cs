@@ -18,6 +18,8 @@ public class Ejecucion1
     {
         return 0; 
     }
+    // En un metodo C# se tienen
+    // modificador_acceso tipo_retorno NombreMetodo(tipo_parametro parametro ...)
     public List<Solucion> GenerarVecinos(Solucion actual)
     {
         var vecinos = new List<Solucion>();
@@ -63,16 +65,29 @@ public class Ejecucion1
         }
         return true;
     }
+
+    //----------------------------------------------------------------------------------------------------------------------------
     public static void Semana1()
     {
+        // Inicializamos el numero de reinas y en consecuencia tambien el tablero
+        // ya que el programa es de las n reinas tiene tablero nxn
         int reinas = 4;
+        
+        // Aqui inicializamos la solucion inicial,
+        // que es colocar todas las reinas en la fila 0, 
+        // cada una en una columna diferente.
         var solucion_inicial_coords = new List<Tuple<int, int>>();
         for (int i = 0; i < reinas; i++)
         {
             solucion_inicial_coords.Add(new Tuple<int, int>(0, i));
         }
-
+        // Necesitamos crear una instancia de Ejecucion1, hay que recordar que 
+        // este metodo Semana1 es static, llegamos aqui a traves de Ejecucion1.Semana1()
+        // desde Program.cs, de esa forma podemos ejecutar un metodo de clase pero no de
+        // intancia, todos los metodos que le pasamos a .Busqueda() son de instancia, 
+        // por eso necesitamos crear una instancia de Ejecucion1 para poder pasarlos.
         var ejec = new Ejecucion1();
+        // Ahora creamos una instancia
         var solucionInicial = new Solucion(0, solucion_inicial_coords);
 
         AEstrella astar = new AEstrella();

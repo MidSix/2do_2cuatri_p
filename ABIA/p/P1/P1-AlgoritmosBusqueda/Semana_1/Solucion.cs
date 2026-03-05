@@ -8,6 +8,14 @@ Grupo de prácticas:
 
 namespace n_reinas
 {
+// Esta es la clase que usamos para definir los estados, cada estado, es decir
+// cada configuracion de reinas en el tablero, se representa con una instancia de esta clase.
+
+// En ningun caso logico coords deberia ser null porque el unico punto donde se instancia
+// esta clase es al crear la solucion inicial y al agregar vecinos. 
+// para la solucion inicial se le asigna una lista de coordenadas, 
+// y para los vecinos se se agregan nuevas instancias a partir de la solucion actual,
+// que como minimo sera la inicial que ya tiene coordenadas.
 public class Solucion(int coste, List<Tuple<int,int>>? coords)
 {
     public int Coste { get; set; } = coste;
@@ -27,9 +35,10 @@ public class Solucion(int coste, List<Tuple<int,int>>? coords)
         }
         return "Coordenadas: No definidas";
     }
-
+    // Sobrecarga de operadores para comparar soluciones
     public static bool operator ==(Solucion a, Solucion b) => a.Coords?.ToString() == b.Coords?.ToString();
     public static bool operator !=(Solucion a, Solucion b) => !(a == b);
+    
     public override bool Equals(object? obj) 
     {
         if (obj is not Solucion other) return false;
@@ -59,7 +68,6 @@ public class Solucion(int coste, List<Tuple<int,int>>? coords)
     public static bool operator >(Solucion? a, Solucion? b)
     {
         return b < a;// Reutilizamos la lógica: "a > b" es lo mismo que decir "b < a"
-
     }
 
     public static bool operator <=(Solucion? a, Solucion? b)

@@ -51,7 +51,7 @@ public class ColaDePrioridad : IListaCandidatos
         {
             var solucionExistente = _buscador[id];
             if (solucionExistente.Coste <= prioridad) return;
-            
+
             Borrar(solucionExistente);
         }
 
@@ -86,11 +86,13 @@ public class ColaDePrioridad : IListaCandidatos
 }
  // ----------------------------Semana_2-----------------------------------------------------------------------
     // Implementación de una cola FIFO para búsqueda en anchura (BFS).
+    // clases hijas de la interfaz
     public class Cola : IListaCandidatos
     {
         private Queue<Solucion> _cola = new();
         private HashSet<string> _enLista = new();
-
+        // Funcion anonima para encapsular el objeto _cola y
+        // Simplemente conseguir el Count
         public int Count => _cola.Count;
 
         public void Anhadir(Solucion solucion, int prioridad = 0)
