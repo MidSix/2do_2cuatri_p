@@ -59,7 +59,7 @@ public class Ejecucion1
                     Math.Abs((solucion.Coords?[i].Item1 ?? 0) - (solucion.Coords?[j].Item1 ?? 0)) == 
                     Math.Abs((solucion.Coords?[i].Item2 ?? 0) - (solucion.Coords?[j].Item2 ?? 0))) // Diagonal
                 {
-                    return false; 
+                    return false;
                 }
             }
         }
