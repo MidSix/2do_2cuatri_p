@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/sebastian/Library/CloudStorage/OneDrive-UniversidadedaCoruña/Documentos/ai-career/900university/2do_curso/2do_cuatri/ABIA/p/P1/P1-AlgoritmosBusqueda/P1-AlgoritmosBusqueda.csproj": {}
+    "C:\\Users\\Usuario\\Desktop\\2nd curso repo\\2do_2cuatri_p\\ABIA\\p\\P1\\P1-AlgoritmosBusqueda\\P1-AlgoritmosBusqueda.csproj": {}
   },
   "projects": {
-    "/Users/sebastian/Library/CloudStorage/OneDrive-UniversidadedaCoruña/Documentos/ai-career/900university/2do_curso/2do_cuatri/ABIA/p/P1/P1-AlgoritmosBusqueda/P1-AlgoritmosBusqueda.csproj": {
+    "C:\\Users\\Usuario\\Desktop\\2nd curso repo\\2do_2cuatri_p\\ABIA\\p\\P1\\P1-AlgoritmosBusqueda\\P1-AlgoritmosBusqueda.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sebastian/Library/CloudStorage/OneDrive-UniversidadedaCoruña/Documentos/ai-career/900university/2do_curso/2do_cuatri/ABIA/p/P1/P1-AlgoritmosBusqueda/P1-AlgoritmosBusqueda.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\2nd curso repo\\2do_2cuatri_p\\ABIA\\p\\P1\\P1-AlgoritmosBusqueda\\P1-AlgoritmosBusqueda.csproj",
         "projectName": "P1-AlgoritmosBusqueda",
-        "projectPath": "/Users/sebastian/Library/CloudStorage/OneDrive-UniversidadedaCoruña/Documentos/ai-career/900university/2do_curso/2do_cuatri/ABIA/p/P1/P1-AlgoritmosBusqueda/P1-AlgoritmosBusqueda.csproj",
-        "packagesPath": "/Users/sebastian/.nuget/packages/",
-        "outputPath": "/Users/sebastian/Library/CloudStorage/OneDrive-UniversidadedaCoruña/Documentos/ai-career/900university/2do_curso/2do_cuatri/ABIA/p/P1/P1-AlgoritmosBusqueda/obj/",
+        "projectPath": "C:\\Users\\Usuario\\Desktop\\2nd curso repo\\2do_2cuatri_p\\ABIA\\p\\P1\\P1-AlgoritmosBusqueda\\P1-AlgoritmosBusqueda.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuario\\Desktop\\2nd curso repo\\2do_2cuatri_p\\ABIA\\p\\P1\\P1-AlgoritmosBusqueda\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/sebastian/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
