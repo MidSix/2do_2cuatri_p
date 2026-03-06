@@ -70,6 +70,7 @@ namespace Ejecuciones
                         return false;
                     }
                 }
+                //se mueven una para abajo y con el modulo vuelve arriba.
             }
             return true;
         }

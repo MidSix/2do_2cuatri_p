@@ -38,10 +38,6 @@ FAA/*
 RCR/*
 
 !ABIA/p
-ABIA/p/TGR_1/obj/
-ABIA/p/TGR_1/bin/
-ABIA/p/TGR_1/TGR_1.sln
-ABIA/p/TGR_1/TGR1_XoelSanchezDacoba_SebastianDavidMorenoExposito.zip
 !ABIA/notas
 
 !ALF/p
@@ -49,6 +45,7 @@ ABIA/p/TGR_1/TGR1_XoelSanchezDacoba_SebastianDavidMorenoExposito.zip
 
 !CCPD/p
 !CCPD/notas
+
 # Se elimino del remoto la carpeta FAA de practicas y se dejo de
 # trackear, esto para crear un repositorio distinto con las practicas
 # de esta asignatura.
@@ -56,8 +53,9 @@ ABIA/p/TGR_1/TGR1_XoelSanchezDacoba_SebastianDavidMorenoExposito.zip
 !RCR/p
 !RCR/notas
 
-2do_cuatri\ABIA\p\P1\P1-AlgoritmosBusqueda\bin\
-2do_cuatri\ABIA\p\P1\P1-AlgoritmosBusqueda\obj\
-
 #---------------------please_don't_modify-------------------------------
 
+# Global ignores
+**/.DS_Store
+**/[Bb]in/
+**/[Oo]bj/
