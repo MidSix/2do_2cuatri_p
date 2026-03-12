@@ -38,4 +38,4 @@ Esta comportamiento es parte del diseño de `stress` para asegurar que las opera
 ---
 [[006_atop_monitorizacion_y_entornos_virtualizados]]
 [[007_interpretacion_avanzada_atop]]
-[[008_estados_procesos_linux]]
+[[008_estados_procesos_[]()linux]]

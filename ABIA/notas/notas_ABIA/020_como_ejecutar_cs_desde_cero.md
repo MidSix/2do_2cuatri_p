@@ -12,7 +12,7 @@ Si usas el gestor de paquetes **Scoop**, la instalación es mucho más limpia, s
 ```powershell
 scoop install dotnet-sdk
 ```
-> Si no tienes o no sabes qué es Scoop, consulta esta guía: [Cómo Instalar y Usar Scoop](../../../../../../100technologies/SO/windows11/009_scoop_package_manager.md).
+> Si no tienes o no sabes qué es Scoop, consulta esta guía: [Cómo Instalar y Usar Scoop](001_scoop_package_manager.md).
 
 ### Método 2: Manual (Tradicional)
 1.  **Ir a la web oficial:** Accede a la página de descargas de .NET: [https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download).
