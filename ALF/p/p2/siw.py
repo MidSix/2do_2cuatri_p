@@ -1,18 +1,9 @@
-class Automaton:
-    """
-    Tratamos de crear una especie de lista posicionada que nos permita aplicar las transiciones,
-    para ello haremos uso de esta clase con la subclase estado.
-    Lo que sabemos por el enunciado es que la primera celda contiene el número de celdas total
-    """
-    def __init__(self, binary_file):
-        self.bin = self.read_bin(binary_file)
-        self.cells=int.from_bytes(self.bin[0:4], byteorder='little')#Total de celdad
-        self.automaton = self.gen_table(self.bin)
+class Nafda():
+    def __init__(self, bin_filename):
+        self.raw_bin = self.read_bin(bin_filename)
+        self.dict_automatron = self.format_table()
 
     def read_bin(filename)->list:
-        """
-        Leemos el archivo binario y lo almacenamos en una lista de enteros.
-        """
         automatron_bin = []
         with open(filename, 'rb') as f:
             while True:
@@ -21,71 +12,68 @@ class Automaton:
                     break
                 automatron_bin.append(byte[0])
         return automatron_bin
-    
-    def gen_table(self):
-        return None
 
-    class state:
+    def format_table(self) -> dict:
         """
-        Un estado contendrá:
+        Formateamos la tabla del autómata. Sabemos que su estructura es la siguiente:
+        Los primeros 4 bytes son el número total de celdas (autoexcluyéndose).
+        A partir de ahí tenemos:
+        
         • Primera celda, con la información del estado:
-        ◦ 1 byte: Número de celdas consecutivas (transiciones) que definen ese estado.
         ◦ 3 bytes: Peso de la indexación.
+        ◦ 1 byte: Número de celdas consecutivas (transiciones) que definen ese estado.
         • Celdas con información de las transiciones:
-        ◦ 3 byte: Carácter que representa la transición.
-        ◦ 1 byte: Celda destino de la transición
+        ◦ 3 bytes: Celda destino de la transición.
+        ◦ 1 byte: Carácter que representa la transición.
+        
+        Almacenaremos un diccionario para fácil acceso donde cada elemento será una tupla (celda).
         """
-        def __init__(self, transitions):
-            self.weight = 0 #Inicialmente valen 0, desde la clase matriz ya emplearemos un algotimo de asignacion
-            self.transitions = transitions
-            self.cells
-
-
-
-
-
-
+        table=self.raw_bin
+        bytes_per_cell = 4#int de referencia para no andar escribiendo 4 en todos lados
+        num_cells = int.from_bytes(table[0:bytes_per_cell], byteorder='little')
+        automaton = {}
+        index = 4  # Empezamos directamente en la celda 1 (byte 4)
+        limit = 4 + (num_cells * bytes_per_cell)# El tamaño total esperado será 4 (cabecera) + (num_cells * 4)
+        
+        while index < len(table) and index < limit:#El limite es por si por algún casual hay basura en el bin o vete a saber
+            cell_id = index // bytes_per_cell # Calculamos el índice único de la celda
             
-def format_table(table)->tuple:
-    """Formateamos la tabla del automata sabemos que su estructura es la siguiente:
-    los primeros 4 bytes son el número de celdas(autoexcluyendose), los siguientes 4 bytes 
-    son el estado final de ahi en adelante tenemos:
-    • Primera celda, con la información del estado:
-    ◦ 1 byte: Número de celdas consecutivas (transiciones) que definen ese estado.
-    ◦ 3 bytes: Peso de la indexación.
-    • Celdas con información de las transiciones:
-    ◦ 3 byte: Carácter que representa la transición.
-    ◦ 1 byte: Celda destino de la transición
-    Sabiendo esto almacenaremos una matriz con cada estado, sus transiciones y sus pesos(inicialmente 0).
-    de la siguiente manera: el automatron será una matriz de listas, cada sublista será un estado y cada celda dentro de ese
-    sublista será una tupla con el peso y las transiciones, cada transición será una tupla con el caracter y la celda destino.
-    este automatron se retornará. 
-    """
-    bytes_per_cell = 4
-    num_cells = int.from_bytes(table[0:4], byteorder='little')
-    final_state = int.from_bytes(table[4:8], byteorder='little')
-    automaton = []
-    index = 8
-    for _ in range(num_cells):
-        num_transitions = table[index]
-        weight = int.from_bytes(table[index+1:index+4], byteorder='little')
-        index += bytes_per_cell
-        transitions = []
-        for _ in range(num_transitions):
-            char = table[index]
-            dest_cell = int.from_bytes(table[index+1:index+4], byteorder='little')
-            transitions.append((char, dest_cell))
+            below = int.from_bytes(table[index:index+3], byteorder='little')# Los primeros 3 bytes son el número de abajo (peso)
+            above = table[index+3]# El cuarto byte es el caracter de arriba (num_transitions)
+            num_transitions = above # Lo guardamos para saber cuántas vueltas dar en el for
+            
+            automaton[cell_id] = (above, below)# Guardamos la celda de estado en el diccionario
             index += bytes_per_cell
-        automaton.append((weight, transitions))
-    return automaton, final_state
+            
+            for _ in range(num_transitions):
+                trans_cell_id = index // bytes_per_cell # Calculamos el índice de la celda de transición
+                
+                dest_cell = int.from_bytes(table[index:index+3], byteorder='little')# Los primeros 3 bytes son la CELDA DESTINO (número de abajo)
+                char_ascii = table[index+3]# El cuarto byte es el CARÁCTER (número de arriba)
+                
+                if 32 <= char_ascii <= 126:
+                    char = chr(char_ascii)# Letras y símbolos normales
+                elif char_ascii == 0:
+                    char = 'ε'# Épsilon (fin de palabra o vacía), queda bonito
+                else:
+                    char = f"<{char_ascii}>"# Símbolos de control internos, aunque no debiera haber
+                
+                automaton[trans_cell_id] = (char, dest_cell)# Guardamos la celda de transición
+                index += bytes_per_cell
+                
+        return automaton
 
-def show_table(table):
-    for i in range(0, len(table), 16):
-        print(' '.join(f'{byte:02x}' for byte in table[i:i+16]))
 
+def index_weights(automatron:list)->list:
+    """
+    Función que indexa los pesos del automata.
+    se dedicará a recorrer el automata al revés empezando
+    por el estado final para indexar los pesos siguiendo el algoritmo
+    explicado en clase de prácticas
+    """
+
+    return automatron
 if __name__ == "__main__":
-    relative_path = './Automatas_Diccionarios/'
-    filename = f'{relative_path}tiny.bin'
-    automatron_table= read_bin(filename)
-    automaton, final_state = format_table(automatron_table)
-    show_table(automatron_table)
+    filename = 'tiny.bin'
+    automatron = Nafda(filename)
+    print(f"Autómata parseado: {automatron}")
