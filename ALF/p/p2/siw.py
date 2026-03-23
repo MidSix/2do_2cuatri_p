@@ -6,6 +6,7 @@ class Nafda():
     """
     Clase que implementa un automáta sobre una implementación de lista dirigida sobre un diccionario
     Algo raro, pero es lo que se me ocurrió para manejar fácil el formato del binario.
+    Puede que me complicase un poco la vida.
     """
     def __init__(self, bin_filename):
         self.raw_bin = self.read_bin(bin_filename)
@@ -119,7 +120,7 @@ class Nafda():
         De esta forma, preservamos intacta la estructura y los caracteres originales.
         Ya fui previsor y por esto guardo el bin original
         """
-        binario_modificado = bytearray(self.raw_bin)
+        binario_ew = bytearray(self.raw_bin)
         bytes_per_cell = 4
         
         for cell_id, tupla in self.dict_automatron.items(): # Recorremos solo las celdas de estado
@@ -128,11 +129,10 @@ class Nafda():
                 peso_calculado = tupla[1]
                 byte_index = (cell_id) * bytes_per_cell#Como no cambiamos los ids, la direccion es la misma
                 peso_bytes = peso_calculado.to_bytes(3, byteorder='little')
-                binario_modificado[byte_index : byte_index+3] = peso_bytes
+                binario_ew[byte_index : byte_index+3] = peso_bytes
                 
-        # Escribimos el bytearray resultante en el nuevo archivo binario
         with open(output_filename, 'wb') as f:
-            f.write(binario_modificado)
+            f.write(binario_ew)
 
 if __name__ == "__main__":#Voy a usar argparse porque me es bastante cómodo
     parser = argparse.ArgumentParser(description="siw.py - State Indexing Weights")
