@@ -1,17 +1,20 @@
+import argparse
+import sys
+import os
+
 class Nafda():
+    """
+    Clase que implementa un automáta sobre una implementación de lista dirigida sobre un diccionario
+    Algo raro, pero es lo que se me ocurrió para manejar fácil el formato del binario.
+    """
     def __init__(self, bin_filename):
         self.raw_bin = self.read_bin(bin_filename)
         self.dict_automatron = self.format_table()
-
-    def read_bin(filename)->list:
-        automatron_bin = []
+    
+    @staticmethod
+    def read_bin(filename) -> list:
         with open(filename, 'rb') as f:
-            while True:
-                byte = f.read(1)
-                if not byte:
-                    break
-                automatron_bin.append(byte[0])
-        return automatron_bin
+            return list(f.read())
 
     def format_table(self) -> dict:
         """
@@ -48,7 +51,8 @@ class Nafda():
             for _ in range(num_transitions):
                 trans_cell_id = index // bytes_per_cell # Calculamos el índice de la celda de transición
                 
-                dest_cell = int.from_bytes(table[index:index+3], byteorder='little')# Los primeros 3 bytes son la CELDA DESTINO (número de abajo)
+                dest_cell = int.from_bytes(table[index:index+3], byteorder='little')+1# Los primeros 3 bytes son la CELDA DESTINO (número de abajo), 
+                #Añadimos un offset de 1 a la celda de destino por como es el .bin, que se autoexcluye al calcular su destino
                 char_ascii = table[index+3]# El cuarto byte es el CARÁCTER (número de arriba)
                 
                 if 32 <= char_ascii <= 126:
@@ -62,18 +66,94 @@ class Nafda():
                 index += bytes_per_cell
                 
         return automaton
+    
+    def is_state(self,item:tuple)->bool:
+        """
+        Si una tupla es la cabecera de un estado,
+        entonces el primer elemento es un entero (número de transiciones) y el segundo es el peso de indexación.
+        """
+        return isinstance(item[0], int)
+ 
+    def obtain_transitions(self, id_celda: int) -> list:
+        estado = self.dict_automatron[id_celda]
+        num_transiciones = estado[0]
+        inicio_transiciones = id_celda + 1 # Las transiciones arrancan en la celda inmediata al estado
+        return [self.dict_automatron[i] for i in range(inicio_transiciones, inicio_transiciones + num_transiciones)]
+    
+    def __str__(self) -> str:
+        return str(self.dict_automatron)
+    
+    def __len__(self):#Pensé que le iba a dar más uso, pero nay
+        return self.dict_automatron.__len__()
+    
+    def index_weights(self,id_celda:int=2) -> int:#Pensar esta función llevo un rato muy largo de Dios
+        """
+        Función que indexa los pesos del automata.
+        Aplica recorrido en profundidad recursivo.
+        Por defecto arranca en el estado inicial (celda 1).
+        """
+        estado = self.dict_automatron[id_celda]
+        num_transiciones = estado[0]
+        peso_actual = estado[1]
+        
+        if peso_actual > 0:#Si ya se paso por aqui, mantenemos el peso
+            return peso_actual
+            
+        if id_celda == 1: #Fondo de la "pila", el estado final 
+            nuevo_peso = 1
+            self.dict_automatron[id_celda] = (num_transiciones, nuevo_peso)
+            return nuevo_peso
+            
+        suma_pesos = 0
+        transiciones = self.obtain_transitions(id_celda)
+        for _, dest_celda in transiciones:
+            suma_pesos += self.index_weights(dest_celda)#La llamada recursiva
+            
+        self.dict_automatron[id_celda] = (num_transiciones, suma_pesos)
+        return suma_pesos#Retornamos la suma para la call
+    
+    def save_bin(self, output_filename: str):
+        """
+        Crea una copia de los bytes originales y sobrescribe únicamente
+        los 3 bytes de peso de cada celda de estado con los nuevos valores calculados.
+        De esta forma, preservamos intacta la estructura y los caracteres originales.
+        Ya fui previsor y por esto guardo el bin original
+        """
+        binario_modificado = bytearray(self.raw_bin)
+        bytes_per_cell = 4
+        
+        for cell_id, tupla in self.dict_automatron.items(): # Recorremos solo las celdas de estado
 
+            if self.is_state(tupla):
+                peso_calculado = tupla[1]
+                byte_index = (cell_id) * bytes_per_cell#Como no cambiamos los ids, la direccion es la misma
+                peso_bytes = peso_calculado.to_bytes(3, byteorder='little')
+                binario_modificado[byte_index : byte_index+3] = peso_bytes
+                
+        # Escribimos el bytearray resultante en el nuevo archivo binario
+        with open(output_filename, 'wb') as f:
+            f.write(binario_modificado)
 
-def index_weights(automatron:list)->list:
-    """
-    Función que indexa los pesos del automata.
-    se dedicará a recorrer el automata al revés empezando
-    por el estado final para indexar los pesos siguiendo el algoritmo
-    explicado en clase de prácticas
-    """
+if __name__ == "__main__":#Voy a usar argparse porque me es bastante cómodo
+    parser = argparse.ArgumentParser(description="siw.py - State Indexing Weights")
+    parser.add_argument('input_bin', help="Fichero con la versión compilada de un autómata finito acíclico.")
+    parser.add_argument('output_bin', help="Fichero de salida en el que se guardará la nueva versión con los pesos.")
+    
+    args = parser.parse_args()
+    
+    # Manejo de errores de fichero no existente y demás
+    if not os.path.exists(args.input_bin):
+        print(f"Error: El fichero de entrada '{args.input_bin}' no existe.", file=sys.stderr)
+        sys.exit(1)
+        
+    try:#Instanciamos, indexamos pesos y guardamos
+        automata = Nafda(args.input_bin)
+        automata.index_weights(id_celda=2)
+        automata.save_bin(args.output_bin)
+        
+        print(f"Pesos calculados y guardados en '{args.output_bin}'.")
+        
+    except Exception as e:#Error genérico
+        print(f"Error procesando el autómata: {e}", file=sys.stderr)
+        sys.exit(1)
 
-    return automatron
-if __name__ == "__main__":
-    filename = 'tiny.bin'
-    automatron = Nafda(filename)
-    print(f"Autómata parseado: {automatron}")
