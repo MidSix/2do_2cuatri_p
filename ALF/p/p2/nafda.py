@@ -87,7 +87,7 @@ class Nafda():
     def __len__(self):#Pensé que le iba a dar más uso, pero nay
         return self.dict_automatron.__len__()
     
-    def words_accepted(self, id_celda: int = 2, prefijo: str = ""):# Con toda la estructura ya hecha en la parte 1, esta función sale sola
+    def list_words(self, id_celda: int = 2, prefijo: str = ""):# Con toda la estructura ya hecha en la parte 1, esta función sale sola
         """
         Imprime recursivamente todas las palabras del autómata.
         """
@@ -97,7 +97,7 @@ class Nafda():
             if char == 'ε' :  # O el carácter que denote fin de palabra 
                 print(prefijo)#Imprimimos lo acumulado
             else:
-                self.words_accepted(dest_celda, prefijo + char)
+                self.list_words(dest_celda, prefijo + char)
     
     def word_to_index(self, palabra: str) -> str:#Esta función ya estaba hecha en pseudocodigo, la adapte para nuestra clase
         """
@@ -137,8 +137,7 @@ class Nafda():
         else:
             return "unknown" 
 
-
-    def indice_a_palabra(self, indice: int) -> str:#Lo mismo que la anterior
+    def index_to_word(self, indice: int) -> str:#Lo mismo que la anterior
         """
         Implementación fiel del pseudocódigo Indice_a_Palabra (Figura 3).
         """
@@ -181,8 +180,10 @@ class Nafda():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="nadfa.py - Diccionario e indexación (Parte 2)")
     
-    parser.add_argument('opcion', choices=['-d', '-i', '-w'],     # El PDF especifica tres opciones exactas: '-d', 'i', 'w' 
-                        help="Opción a ejecutar: -d (diccionario), -i (palabra a índice), -w (índice a palabra)")
+    grupo = parser.add_mutually_exclusive_group(required=True)#Grupo para que los flags sean mutuamente excluyentes
+    grupo.add_argument('-d', action='store_true', help="Volcar el diccionario completo")# El PDF especifica tres opciones exactas: '-d', '-i', '-w' 
+    grupo.add_argument('-i', action='store_true', help="Convertir palabra a índice (Lee de stdin)")
+    grupo.add_argument('-w', action='store_true', help="Convertir índice a palabra (Lee de stdin)")
     
     parser.add_argument('input_bin', help="Fichero con la versión compilada y numerada del autómata.")
     
@@ -195,23 +196,23 @@ if __name__ == "__main__":
     try:
         automata = Nafda(args.input_bin)
         
-        if args.opcion == '-d':# 1. Opción -d: Listar todo el diccionario
-            automata.listar_palabras(id_celda=2, prefijo="")
+        if args.d:# 1. Opción -d: Listar todo el diccionario
+            automata.list_words(id_celda=2, prefijo="")
             
-        elif args.opcion == '-i':# 2. Opción i: Palabra a Índice (Leyendo de stdin)
+        elif args.i:# 2. Opción i: Palabra a Índice (Leyendo de stdin)
             for linea in sys.stdin:# sys.stdin nos permite procesar las líneas enviadas por "cat" o introducidas a mano
                 palabra = linea.strip() # Quitamos los saltos de línea y espacios fantasma porsiaca.
                 if palabra:
-                    resultado = automata.palabra_a_indice(palabra)
+                    resultado = automata.word_to_index(palabra)
                     print(resultado)
                     
-        elif args.opcion == '-w': # 3. Opción w: Índice a Palabra (Leyendo de stdin) 
+        elif args.w: # 3. Opción w: Índice a Palabra (Leyendo de stdin) 
             for linea in sys.stdin:
                 str_indice = linea.strip()
                 if str_indice:
                     try:
                         indice = int(str_indice)
-                        resultado = automata.indice_a_palabra(indice)
+                        resultado = automata.index_to_word(indice)
                         print(resultado)
                     except ValueError:
                         print("index out of bounds")# Si nos meten texto en lugar de un número, lo considerao out
