@@ -29,8 +29,4 @@ La razón por la que el analizador léxico es un autómata es porque **su tarea 
 
 En resumen, el analizador léxico es una implementación práctica de un autómata finito, diseñada para reconocer la estructura más básica (los tokens) de un lenguaje de programación.
 
-## ¿Qué es un lenguaje regular?
-
-- 
-
 

@@ -1,0 +1,23 @@
+respuestas a la parte opcional
+
+sobre el crecimiento del tamaño:
+el tamaño de los autómatas sube bastante porque ahora cada transición necesita 8 bytes (4 para destino/carácter y 4 para el peso/relleno) en lugar de los 4 originales. los estados se quedan igual con 4 bytes, así que el impacto real depende de la densidad de transiciones de cada diccionario.
+**siw.py y tiw.py**
+- tiny.bin: de 140 a 216 bytes (+54.3%)
+- small.bin: de 155,988 a 259,532 bytes (+66.4%)
+- medium.bin: de 241,136 a 414,920 bytes (+72.1%)
+- large.bin: de 850,568 a 1,489,688 bytes (+75.1%)
+
+tiempos de ejecución y aceleración (word_to_index):
+tras comparar las dos versiones pasando todos los términos de cada diccionario, los resultados son:
+**nadfa.py y nadfa2.py**
+- tiny: 0.083s vs 0.084s (despreciable)
+- small: 0.372s vs 0.317s (~15% de mejora)
+- medium: 6.366s vs 4.811s (~24% de mejora)
+- large: 13.971s vs 10.654s (~24% de mejora)
+
+mejoras en las funciones de hashing:
+la mejora se nota sobre todo en palabra_a_indice. antes, en cada paso del autómata, teníamos que acceder a los estados destino de todas las transiciones precedentes para sumar sus pesos, lo que obligaba a dar muchos saltos por la memoria. ahora el peso está en la propia transición que estamos recorriendo, así que el cálculo es directo y mucho más fluido. para indice_a_palabra no hay una mejora tan clara porque la lógica de ir "descontando" rangos de índices sigue siendo necesaria.
+
+opinión sobre si compensa:
+Se considera que depende totalmente del uso que se le vaya a dar. Si se esta en un sistema con poca memoria, los pesos en los estados son mucho más eficientes porque el autómata ocupa casi la mitad (como se ve en el caso de large.bin). pero si lo que se busca es rendimiento en un entorno donde el tiempo de respuesta es crítico, compensa pagar ese extra de espacio para que el hashing sea inmediato y ahorrarle trabajo a la cpu.

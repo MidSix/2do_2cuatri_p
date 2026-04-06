@@ -41,18 +41,20 @@ RCR/*
 !ABIA/notas
 
 !ALF/p
+ALF/p/p2/*
+!ALF/p/p2/trackear
+
 !ALF/notas
 
 !CCPD/p
 !CCPD/notas
-
+CCPD/p/p4/test
 # Se elimino del remoto la carpeta FAA de practicas y se dejo de
 # trackear, esto para crear un repositorio distinto con las practicas
 # de esta asignatura.
 
 !RCR/p
 !RCR/notas
-
 #---------------------please_don't_modify-------------------------------
 
 # Global ignores

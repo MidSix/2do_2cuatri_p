@@ -1,0 +1,1 @@
+ - **Que es una cadena?** :  Es una secuencia finita de símbolos de un determinado alfabeto se denomina palabra o cadena sobre dicho alfabeto.
