@@ -23,7 +23,7 @@ stitches = []
 with ctl.solve(yield_=True) as handle:
     for model in handle:
         if num_models > 0: 
-            print("Warning: more than 1 model (Tu puzzle tiene múltiples soluciones)")
+            print("Encontrados más de 1 modelo, solo se procesará el primero.")
             break
             
         for atom in model.symbols(atoms=True):#Muy comodo poder recorrer los átomos de la solución directamente.
@@ -43,10 +43,10 @@ with ctl.solve(yield_=True) as handle:
 if num_models == 0: 
     print("UNSATISFIABLE (No se encontró solución)")
 else:
-    print(f"Solución encontrada. Generando {output_file}...")
+    print(f"Solución encontrada. Generado {output_file}")
     
     #Lo siguiente s oara hacer el dibujo
-    grid = [[" " for _ in range(size)] for _ in range(size)]# Creamos una matriz vacía llena de espacios
+    grid = [["." for _ in range(size)] for _ in range(size)]# Creamos una matriz vacía llena de puntos
 
     for (x, y, x1, y1) in stitches: # Y simplemente recorremos las puntadas y dibujamos según corresponda
         if y == y1:# Si Y es igual, están en la misma columna -> Puntada Vertical

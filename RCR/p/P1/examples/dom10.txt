@@ -1,0 +1,18 @@
+15 3
+aaaaaaaaaabbbbb
+aaacaddabbbbbbb
+aacccddaaabbbbb
+caccccdbbbbbddd
+caaccddbddddddd
+ccccdddddeedddd
+ffcccdcedeeeddg
+ffccccceeeggdgg
+fccccecceeggdgg
+fffffeeeegggggg
+fhhhffeheggeegg
+ffhhhfehegeeegg
+hfhheeeheeeeeee
+hfhheehheeeheee
+hhhhhhhhhhhhhhh
+0 8 6 6 6 11 5 5 9 12 2 3 3 1 1
+1 8 6 3 7 6 11 2 9 7 4 3 5 4 2

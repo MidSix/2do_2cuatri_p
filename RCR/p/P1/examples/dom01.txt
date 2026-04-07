@@ -1,0 +1,8 @@
+5 1
+aabbc
+aaccc
+daccc
+dcccc
+deeee
+3 5 4 1 1
+4 2 2 3 3

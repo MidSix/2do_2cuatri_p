@@ -1,0 +1,10 @@
+7 2
+aaaabbb
+aaabbaa
+aaaaaaa
+cccaaaa
+ccdeaea
+dcdeeea
+dddddea
+3 2 3 4 1 6 1
+2 2 2 3 3 5 3

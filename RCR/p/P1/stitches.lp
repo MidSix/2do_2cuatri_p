@@ -18,5 +18,5 @@ connected_regions(R1, R2) :- ady_cells(X,Y, X1,Y1), region(X,Y,R2), region(X1,Y1
 X,Y,X1,Y1 : stitch(X,Y,X1,Y1), region(X,Y,R2), region(X1,Y1,R1) } != M.%Esta regla es más compleja, pero lo que hace es sencillo
 % elimina las soluciones en las que el número de puntadas entre dos regiones conectadas no es igual a M
 
-:- col(Y), total_c(Y, T), #count{ X : hole(X,Y) } != T.%Aqui eliminamos las soluciones que no cumplen con el total de agujeros por columna
-:- row(X), total_r(X, T), #count{ Y : hole(X,Y) } != T.%Aqui las de las filas
+:- col(Y), t_c(Y, T), #count{ X : hole(X,Y) } != T.%Aqui eliminamos las soluciones que no cumplen con el total de agujeros por columna
+:- row(X), t_r(X, T), #count{ Y : hole(X,Y) } != T.%Aqui las de las filas

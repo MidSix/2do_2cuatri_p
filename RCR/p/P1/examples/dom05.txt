@@ -1,0 +1,10 @@
+7 2
+aaaaaab
+bbbbbbb
+cbbddbb
+ccddddb
+ccdddbb
+ccccddd
+eeecccc
+2 4 4 3 3 3 1
+3 2 5 2 1 4 3

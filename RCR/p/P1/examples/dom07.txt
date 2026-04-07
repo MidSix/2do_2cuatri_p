@@ -1,0 +1,13 @@
+10 2
+aaaaabbbcc
+dadaabcbcc
+dadbabcccc
+dddbbbcccc
+eeddddffcc
+geeeffffcf
+geeeeeefff
+gghhhfeeef
+gghhhffeff
+ghhhhfffff
+5 4 9 6 7 5 5 2 2 3
+4 4 5 3 7 8 4 7 4 2

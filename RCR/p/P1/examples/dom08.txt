@@ -1,0 +1,13 @@
+10 3
+aaaaabbbbc
+aaaaaabccc
+aaaabbbbcc
+dddbbbcccd
+dedddddddd
+deffdddgdg
+deffddgggg
+deffgggffg
+eefffgffgg
+eeffffffff
+6 7 7 4 7 8 4 6 6 5
+4 4 7 10 9 8 6 4 4 4

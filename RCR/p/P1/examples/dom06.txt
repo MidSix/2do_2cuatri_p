@@ -1,0 +1,13 @@
+10 1
+aabccddddd
+aabbceeeed
+aaaaceeeed
+afaccegged
+affhhhggee
+aahhghhgeg
+hhhigggggg
+hjjiiiiiig
+hjiiiiiggg
+jjjjjjiiig
+2 5 5 7 4 5 1 1 2 2
+3 4 5 4 3 7 2 2 4 0
