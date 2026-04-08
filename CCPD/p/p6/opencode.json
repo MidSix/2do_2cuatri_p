@@ -1,0 +1,69 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "web-search": {
+        "type": "local",
+        "command": [
+            "node",
+            "C:\\MCP\\web-search-mcp-v0.3.2\\dist\\index.js"
+        ],
+        "enabled": true
+    },
+    "notebooklm-mcp": {
+        "type": "local",
+        "command": [
+            "uvx",
+            "--from",
+            "notebooklm-mcp-cli",
+            "notebooklm-mcp"
+        ],
+        "enabled": true
+    },
+    "pdf-reader": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@sylphx/pdf-reader-mcp"
+      ],
+      "enabled": true
+    }
+  },
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1"
+      },
+      "models": {
+        "qwen/qwen3.5-9b": {
+          "name": "Qwen3.5 - 9B"
+        },
+        "qwen3.5-9b-claude-4.6-opus-reasoning-distilled": {
+          "name": "Qwen3.5 - 9B_Claude4.6_Reasoning_Distilled"
+        }
+      }
+    }
+  },
+  "permission": {
+    "bash": {
+      "*": "ask",
+      "git *": "ask",
+      "npm *": "allow",
+      "rm *": "ask",
+      "grep *": "allow",
+      "ls *": "allow",
+      "cd *": "allow",
+      "mkdir *": "allow",
+      "touch *": "allow",
+      "mv *": "ask",
+      "dir *": "allow"
+    },
+    "edit": {
+      "*": "ask"
+    },
+    "write": {
+      "*": "ask"
+    }
+  }
+}

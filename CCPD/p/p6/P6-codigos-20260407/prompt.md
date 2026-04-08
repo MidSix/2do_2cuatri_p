@@ -1,0 +1,1 @@
+-> Esta imagen es de una secc
