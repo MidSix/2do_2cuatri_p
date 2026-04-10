@@ -14,7 +14,9 @@ namespace STRIPS{
 
         public Planificador(List<Accion> operadores)
         {
-            _operadores = operadores;//LLamo a las acciones operadores aqui por una movida de C#, que me decia que habia ambiguedad entre el constructor de Planificador y el metodo GenerarPlan, que tambien se llama Planificador, asi que le puse _operadores para diferenciarlo
+            _operadores = operadores;//LLamo a las acciones operadores aqui por una movida de C#, que me 
+            // decia que habia ambiguedad entre el constructor de Planificador y el metodo GenerarPlan, 
+            // que tambien se llama Planificador, asi que le puse _operadores para diferenciarlo
         }
         public List<Accion> GenerarPlan(Estado inicial, Estado objetivo)//Aplicamos Busqueda en Anchura
         {//Recicle el código de BFS que hice para el ejercicio anterior, pero adaptandolo a STRIPS.
@@ -44,7 +46,8 @@ namespace STRIPS{
 
                 foreach (var operador in _operadores)
                 {
-                    if (operador.EsAplicable(actual))//Es aplicable solo si se cumplen las precondiciones de la acción en el estado actual
+                    if (operador.EsAplicable(actual))//Es aplicable solo si se cumplen las precondiciones
+                    //  de la acción en el stado actual
                     {
                         Estado siguienteEstado = operador.Aplicar(actual);
                         List<Accion> siguientePlan = new List<Accion>(planActual) { operador };
@@ -57,7 +60,8 @@ namespace STRIPS{
             return null;
         }
 
-        private string ObtenerIdentificadorEstado(Estado e)//Esto es para crear un identificador único para cada estado, para evitar ciclos en la búsqueda
+        private string ObtenerIdentificadorEstado(Estado e)//Esto es para crear un identificador único 
+        // para cada estado, para evitar ciclos,(Lo hubo que meter porque me crasheo el PC en el primer test xd)
         {
             return string.Join("|", e.Hechos
                 .Select(f => f.ToString())
