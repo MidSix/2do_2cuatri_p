@@ -13,11 +13,25 @@ public class Facto//Elemento esencial de los estados, representa una afirmación
 //podemos representar el estado del mundo, por ejemplo con los siguientes Factos: EncimaDe(A,B), 
 //EncimaDe(B,C), Libre(C) podríamos representar un mundo donde A está encima de B,
 // B está encima de C, y C está libre. 
+
+// EncimaDe(A,B) -> Encima de A esta B.
+// EncimaDe(B,C) -> Encima de B esta C.
+// Libre(C) -> C está libre.
 {
     public string Nombre { get; set; }
     public List<string> Argumentos { get; set; }
 
     public Facto(string nombre, params string[] argumentos)
+    // Constructor de la clase, el compilador lo interpreta como tal
+    // ya que tiene el mismo nombre que la clase. "params" es
+    // simplemente una keyword que permite pasar un numero variable
+    // de argumentos, el ejemplo mas cercano en python en "*"
+    // simplemente que como en python no se especifican los tipos
+    // basta simplemente con escribir *args y ya esta, aqui en C#
+    // hay que especificar el tipo en en este caso string[] argumentos
+    // entonces seria params = "*" y string[] argumentos = args.
+    // keyword equivalence -> params = *
+    // variable name equivalence -> argumentos = args
     {
         Nombre = nombre;
         Argumentos = argumentos.ToList();

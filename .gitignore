@@ -61,3 +61,6 @@ CCPD/p/p4/test
 **/.DS_Store
 **/[Bb]in/
 **/[Oo]bj/
+**/*.sln
+**/opencode.json
+**/extras

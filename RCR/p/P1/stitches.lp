@@ -1,3 +1,11 @@
+%Miembros:
+%    - Xoel Sánchez Dacoba
+%    - Sebastián David Moreno Expósito
+%Grupo de prácticas:
+%    G1.1 - Lunes.
+%Encoding type -> 0
+
+
 row(0..N-1) :- size(N).%Generamos filas y columnas
 col(0..N-1) :- size(N).
 
