@@ -9,8 +9,8 @@
 row(0..N-1) :- size(N).%Generamos filas y columnas
 col(0..N-1) :- size(N).
 
-ady_cells(X,Y, X+1,Y) :- region(X,Y,R1), region(X+1,Y,R2), row(X), row(X+1).% Aqui de define la adyacencia, para simplificar, se define que dos celdas son adyacentes si estan una al lado de la otra, ya sea horizontal o verticalmente, y pertenecen a regiones diferentes
-ady_cells(X,Y, X,Y+1) :- region(X,Y,R1), region(X,Y+1,R2), col(Y), col(Y+1).
+ady_cells(X,Y, X+1,Y) :- region(X,Y,R1), region(X+1,Y,R2), row(X), row(X+1).% Aqui de define la adyacencia, para simplificar, se define que dos celdas son adyacentes si estan una al lado de la otra, ya sea horizontal o verticalmente
+ady_cells(X,Y, X,Y+1) :- region(X,Y,R1), region(X,Y+1,R2), col(Y), col(Y+1).% Una posible mejora sería ya aquí definir que R1=!R2, para evitar redundancia, pero lo dejo así para que se vea más claro el concepto de adyacencia
 
 { stitch(X,Y, X1,Y1) } :- ady_cells(X,Y, X1,Y1), region(X,Y,R1), region(X1,Y1,R2), R1 != R2.%Regla que define que se puede colocar una puntada entre dos celdas adyacentes si pertenecen a regiones diferentes
 
