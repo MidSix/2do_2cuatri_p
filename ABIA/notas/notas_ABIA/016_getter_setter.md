@@ -106,4 +106,12 @@ public class Student
 ## La palabra clave `value`
 Es el error más común al empezar en C#. 
 *   En el `set`, `value` representa lo que el usuario envió (ej. `estudiante.Name = "Pepe"`, entonces `value` vale `"Pepe"`).
-*   Si usas el nombre de la propiedad (`Name`) dentro de su propio `set`, estarás leyendo el valor antiguo, no el nuevo.
+*   Si usas el nombre de la propiedad (`Name`) dentro de su propio `set`, estarás leyendo el valor antiguo, no el nuevo
+
+| Concepto                                       | Python 🐍                             | C# #️⃣                                                                                                                   |
+| :--------------------------------------------- | :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------- |
+| **Decorador(python)** **Atributo(C#)**         | `@nombre_decorador`                   | `[nombre_atributo]`                                                                                                      |
+| **Property**                                   | `@property`                           | `public string X { get; set; }`                                                                                          |
+| **Atributo(python)**             **Campo(C#)** | `self.X = y` "dentro del constructor" | `public string X { get; set; }` Se declaran junto a las properties de getter y setter en las auto-implemented properties |
+
+> Los getter y setter son properties especificas en

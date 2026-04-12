@@ -10,64 +10,41 @@ namespace STRIPS{
 
     public class Planificador
     {
-        private List<Accion> _operadores;
+        //Declaramos la lista de acciones
+        private readonly List<Accion> _acciones;// Aqui no usamos 
+        // getters y setters ya que dichos wrappers sirven para
+        // controlar el permiso en los accesos para lectura y escritura
+        // de una variable fuera de la clase que la contiene.
+        // Pero como la variable es private y por tanto no se puede 
+        // acceder desde un scope distinto a este modulo, 
+        // no hay ninguna necesidad
+        // (tampoco ninguna prohibicion pero simplemente no tiene
+        // sentido) de definir getters y setters.  
 
-        public Planificador(List<Accion> operadores)
+        // readonly impide la modificacion de la direccion de memoria
+        // a la que su identificador apunta, pero NO impide la
+        // asignacion en el constructor, o sea, impide la modificacion
+        // una vez le hayamos pasado un valor en el constructor, antes
+        // de hacerlo evidentemente no porque si no no se le podria
+        // dar ningun valor xd
+        private readonly IAlgoritmoBusqueda _algoritmo;// Declaramos
+        // la variable que maneja el algoritmo al que llamara el
+        // planificador.
+
+        public Planificador(List<Accion> acciones, IAlgoritmoBusqueda algoritmo)
         {
-            _operadores = operadores;//LLamo a las acciones operadores aqui por una movida de C#, que me 
-            // decia que habia ambiguedad entre el constructor de Planificador y el metodo GenerarPlan, 
-            // que tambien se llama Planificador, asi que le puse _operadores para diferenciarlo
+            _acciones = acciones;
+            _algoritmo = algoritmo; // Aqui se pasara el algoritmo de
+            // busqueda que usara el planificador, BFS funciona muy bien 
+            // en el mundo de bloques pero en TorresHanoi tiene su 
+            // dificultad ya que el problema permite llamar con 
+            // n discos, por eso creo esto para poder pasar por aqui
+            // el algoritmo que vaya a usar para TorresHanoi.
         }
-        public List<Accion> GenerarPlan(Estado inicial, Estado objetivo)//Aplicamos Busqueda en Anchura
-        {//Recicle el código de BFS que hice para el ejercicio anterior, pero adaptandolo a STRIPS.
-            Queue<(Estado estadoActual, List<Accion> camino)> cola = new Queue<(Estado, List<Accion>)>();
-            HashSet<string> visitados = new HashSet<string>();
-            cola.Enqueue((inicial, new List<Accion>()));
-
-            int nodosExpandidos = 0;
-
-            while (cola.Count > 0)
-            {
-                var (actual, planActual) = cola.Dequeue();
-                nodosExpandidos++;
-
-                if (actual.Satisface(objetivo))
-                {
-                    Console.WriteLine($"[Planificador] Objetivo alcanzado tras evaluar {nodosExpandidos} estados.");//Esto es para debugging, lo quitaré luego
-                    return planActual;
-                }
-
-                string hashEstado = ObtenerIdentificadorEstado(actual);
-                if (visitados.Contains(hashEstado))
-                {
-                    continue;
-                }
-                visitados.Add(hashEstado);
-
-                foreach (var operador in _operadores)
-                {
-                    if (operador.EsAplicable(actual))//Es aplicable solo si se cumplen las precondiciones
-                    //  de la acción en el stado actual
-                    {
-                        Estado siguienteEstado = operador.Aplicar(actual);
-                        List<Accion> siguientePlan = new List<Accion>(planActual) { operador };
-                        cola.Enqueue((siguienteEstado, siguientePlan));
-                    }
-                }
-            }
-
-            Console.WriteLine("[Planificador] No se ha encontrado ninguna solución posible.");
-            return null;
-        }
-
-        private string ObtenerIdentificadorEstado(Estado e)//Esto es para crear un identificador único 
-        // para cada estado, para evitar ciclos,(Lo hubo que meter porque me crasheo el PC en el primer test xd)
+        public List<Accion>? GenerarPlan(Estado inicial, Estado objetivo)
         {
-            return string.Join("|", e.Hechos
-                .Select(f => f.ToString())
-                .OrderBy(s => s));
+            // El planificador delega la responsabilidad matemática y simplemente orquesta
+            return _algoritmo.Buscar(inicial, objetivo, _acciones);
         }
     }
 }
-
-

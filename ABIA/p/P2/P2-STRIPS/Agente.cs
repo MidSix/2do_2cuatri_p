@@ -10,7 +10,8 @@ namespace STRIPS
     public class Agente
     {
         private Planificador _planificador;//Estas de aqui son private porque no queremos que nadie más que el agente pueda acceder a ellas, el planificador es parte del agente y el estado actual también
-        private Estado _estadoActual;//(No queremos que sea accesible porque el agente es el único que debe manejar su estado interno)
+        // 
+        private Estado? _estadoActual;//(No queremos que sea accesible porque el agente es el único que debe manejar su estado interno)
 
         public Agente(Planificador planificador)
         {
@@ -27,7 +28,7 @@ namespace STRIPS
             Console.WriteLine("========================================\n");
             _estadoActual = inicial;
 
-            List<Accion> plan = _planificador.GenerarPlan(inicial, objetivo);//Aqui obtenemos el plan
+            List<Accion>? plan = _planificador.GenerarPlan(inicial, objetivo);//Aqui obtenemos el plan
 
             if (plan == null)//Esto en principio no lo habia puesto, pero es importante comprobar 
             // si el planificador ha encontrado un plan válido o no, 
@@ -45,12 +46,23 @@ namespace STRIPS
             }
             Console.WriteLine("========================================\n");//Un separarador Fancy
 
-            // 3. Ejecutar cada acción del plan secuencialmente
+            // Ejecutar cada acción del plan secuencialmente
             foreach (var accion in plan)
             {
                 _estadoActual = accion.Aplicar(_estadoActual);//Aplicamos la acción en la cola
+                // Importante recalcar que aqui para nada
+                // necesitamos comprobar si podemos o no aplicar
+                // la accion porque ese trabajo de comprobacion
+                // es trabajo del algoritmo de busqueda. En este punto
+                // ya tenemos la seguridad de que las acciones del plan
+                // no solo se pueden aplicar sino que son las correctas
+                // por lo que simplemente las vamos aplicando de forma
+                // secuencial para llegar al estado objetivo
+                
+                // .Aplicar() devuelve la clonacion del estado actual
+                // eliminando y agregando los factos requeridos.
 
-                // 4. Mostrar el entorno actualizado tras cada acción 
+                // Mostrar el entorno actualizado tras cada acción 
                 Console.WriteLine($"\nEjecutando: {accion.Nombre}");
                 MostrarMundo(_estadoActual);//LLamamos a mostrar mundo en cada accion, como requiere la practica
 
@@ -58,10 +70,25 @@ namespace STRIPS
 
             Console.WriteLine("Objetivo alcanzado");
         }
-        private void MostrarMundo(Estado estado)
+        private void MostrarMundo(Estado estado) // Esta funcion hace
+        // las de wrapper para llamar a la funcion de dibujo particular
+        // que corresponde. Por tanto es esta la funcion la que llama
+        // el agente.
         {
             Console.WriteLine("Estado del Mundo actual:");
-            DibujarMundoBloques(estado);//Aqui pondremos un if dependiendo de si es hanoi o bloques, de momento lo dejo fijo
+            
+            // Evaluamos dinámicamente en qué mundo estamos para evitar crasheos visuales
+            if (estado.Hechos.Any(f => f.Nombre == "SobreMesa"))
+            // Bastante self-explanined, si hay al menos un hecho 
+            // del estado con el nombre 'SobreMesa' se trata 
+            // del mundo de bloques
+            {
+                DibujarMundoBloques(estado);
+            }
+            else
+            {
+                DibujarTorresHanoi(estado);
+            }
         }
         private static void DibujarMundoBloques(Estado estado)//Esta representación es bastante básica,
             {//pero llevo un rato decidirme por como queria representar el mundo, y esta llevo bastante tiempo jajaja
@@ -114,5 +141,75 @@ namespace STRIPS
                 //De hecho este código de bloques es bastante flexible, podriamos añadir n posiciones en la mesa, y el código seguiría funcionando sin necesidad de cambiar nada
                 //hasta hice que la longitud de la mesa se adapte al número de bloques que hay, aunque en esta práctica solo hay 3 bloques
             }
+
+        private static void DibujarTorresHanoi(Estado estado)
+        {
+            string[] postes = { "PosteA", "PosteB", "PosteC" };
+            List<List<string>> torres = new List<List<string>>();
+
+            // Extraemos la configuración actual de cada torre
+            foreach (var poste in postes)
+            {
+                List<string> torreActual = new List<string>();
+                
+                // Buscamos si hay algún disco directamente sobre la base de este poste
+                var baseDisco = estado.Hechos.FirstOrDefault(f => f.Nombre == "Sobre" && f.Argumentos[1] == poste);
+                
+                if (baseDisco != null)
+                {
+                    string actual = baseDisco.Argumentos[0];
+                    torreActual.Add(actual);
+                    bool tieneEncima = true;
+                    
+                    // Escalamos la torre viendo qué disco está sobre el disco actual
+                    while (tieneEncima)
+                    {
+                        var encima = estado.Hechos.FirstOrDefault(f => f.Nombre == "Sobre" && f.Argumentos[1] == actual);
+                        if (encima != null)
+                        {
+                            actual = encima.Argumentos[0];
+                            torreActual.Add(actual);
+                        }
+                        else
+                        {
+                            tieneEncima = false;
+                        }
+                    }
+                }
+                torres.Add(torreActual);
+            }
+
+            // Dibujamos de arriba hacia abajo
+            // Fijamos la altura máxima al total de discos para que el dibujo no salte
+            int totalDiscos = torres.Sum(t => t.Count);
+            int alturaMaxima = Math.Max(1, totalDiscos);
+
+            Console.WriteLine(); // Espaciado extra
+            for (int nivel = alturaMaxima - 1; nivel >= 0; nivel--)
+            {
+                string fila = "";
+                foreach (var torre in torres)
+                {
+                    if (nivel < torre.Count)
+                    {
+                        string disco = $"[{torre[nivel]}]";
+                        // Magia de C#: Centramos el string del disco en una columna de 10 caracteres
+                        int paddingIzquierdo = (10 + disco.Length) / 2;
+                        fila += disco.PadLeft(paddingIzquierdo).PadRight(10);
+                    }
+                    else
+                    {
+                        // Si no hay disco a esta altura, dibujamos el poste vertical
+                        fila += "    |     ";
+                    }
+                }
+                Console.WriteLine(fila);
+            }
+
+            // 3. Dibujamos las bases de los postes y la mesa
+            Console.WriteLine("  |____|    |____|    |____|  ");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("  PosteA    PosteB    PosteC  \n");
+        }
     }
 }

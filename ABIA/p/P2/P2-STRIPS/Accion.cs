@@ -27,19 +27,34 @@ namespace STRIPS{
         public bool EsAplicable(Estado estadoActual) // Verifica si esta acción se puede realizar en un estado dado.
 
         {
-            return Precondiciones.All(p => estadoActual.Hechos.Contains(p)); // Sencillito es aplicable si el estado actual contiene todas las precondiciones
+            return this.Precondiciones.All(estadoActual.Hechos.Contains); // Sencillito es aplicable si el estado actual contiene todas las precondiciones
+            // Si, lo mismo de antes, esta accion en especifico es
+            // aplicable al estado actual si todos los factos que 
+            // deben cumplirse, es decir, los factos dentro de la lista
+            // precondiciones estan dentro del dominio/mundo, es decir,
+            // los Hechos del estado que se esta evaluando.
 
+            // Ya sabemos que no hace falta la funcion anonima.
+            // Simplemente se pasa la referencia de la funcion que
+            // verifica si un hecho forma parte del conjunto de Hechos
+            // que componen un estado, y el metodo .All() ya se 
+            // encarga de hacer un loop sobre cada elemento de un 
+            // iterable, en este caso Precondiciones, y pasa los
+            // elementos, es decir los factos, como argumento a la
+            // funcion que comprueba si ese hecho esta en el estado
         }
 
         public Estado Aplicar(Estado estadoActual)//Aplicar la accion
         {
             Estado nuevoEstado = estadoActual.Clonar();//Clonamos
+            // .Clonar() ya devuelve una instancia de la clase estado.
 
             foreach (var f in ListaBorrado)//Borramos los hechos que ahora son inciertos
                 nuevoEstado.Eliminar(f);
-
-            foreach (var f in ListaAdicion)//Y agregamos los  que son cierts
+            foreach (var f in ListaAdicion)//Y agregamos los que son cierts
                 nuevoEstado.Agregar(f);
+            // 'var' es una inferencia de tipos que se delega
+            // al compilador.
 
             return nuevoEstado;
         }

@@ -15,42 +15,42 @@ Esta guía asume que dominas Python y traduce esos conceptos a C# (versión mode
 
 ## 1. Sintaxis Básica y Bloques
 
-| Concepto                  | Python 🐍                                           | C# (Moderno) #️⃣                                                                     |
-| :------------------------ | :-------------------------------------------------- | :----------------------------------------------------------------------------------- |
-| **Bloques**               | Indentación obligatoria.                            | Llaves `{ ... }` (La indentación es estética pero recomendada).                      |
-| **Fin de línea**          | Salto de línea.                                     | **Punto y coma `;`** (Obligatorio).                                                  |
-| **Imprimir**              | `print("Hola")`                                     | `Console.WriteLine("Hola");`                                                         |
-| **Leer teclado**          | `input()`                                           | `Console.ReadLine();`                                                                |
-| **Interpolación**         | `f"Valor: {x}"`                                     | `$"Valor: {x}"` ($ va afuera).                                                       |
-| **Variables**             | `x = 10` (Dinámico)                                 | `int x = 10;` o `var x = 10;` (Inferencia de tipos).                                 |
-| **Booleanos**             | `True`, `False`                                     | `true`, `false` (minúscula) same as Julia.                                           |
-| **Nulo**                  | `None`                                              | `null`                                                                               |
-| **Operador AND**          | `and`                                               | `&&`                                                                                 |
-| **Operador OR**           | `or`                                                | **\|\|**                                                                             |
-| **Operador NOT**          | `not`                                               | `!`                                                                                  |
-| **Coments single-line**   | `# comment`                                         | `// comment`                                                                         |
-| **Coments multi-line**    | `"""comment"""`                                     | `/* comment */`                                                                      |
-| **Convertir a int**       | `int()`                                             | `int.Parse("10")` o `Convert.ToInt32("10")`                                          |
-| **Convertir a float**     | `float()`                                           | `float.Parse("10.5")` , `double.Parse("10.5")`                                       |
-| **Longitud**              | `len(lista)`                                        | `lista.Count` o `array.Length`                                                       |
-| **Obtener Tipo**          | `type(x)`                                           | `x.GetType()`                                                                        |
-| **Cargar un modulo**      | `import pandas`                                     | **Automático** (si está en el `.csproj`)                                             |
-| **1-Usar atajo**          | `import pandas as pd`                               | `using Newtonsoft.Json;` (No permite alias tipo `as pd`, solo acorta el prefijo).    |
-| **2-Si borras la línea**  | El código falla (`NameError`).                      | El código funciona (si usas el nombre completo).                                     |
-| **Instanciar clase**      | micoche  = Coche()                                  | **Coche** miCoche = **new** Coche();                                                 |
-| **operador incremento**   | **intentos += 1**                                   | **intentos += 1**. Tienes: ++intentos y intentos++ pero xd. usa `+= `y ya.           |
-| **Comparacion**           | `==`                                                | `==`                                                                                 |
-| **Diferente**             | `!=`                                                | `!=`                                                                                 |
-| **Mayor / Menor**         | `>`, `<`                                            | `>`, `<`                                                                             |
-| **Mayor o igual**         | `>=`                                                | `>=`                                                                                 |
-| **Division entera**       | `//`                                                | `/`                                                                                  |
-| **Division**              | `/`                                                 | `/`                                                                                  |
-| **Modulo**                | `%`                                                 | `%`                                                                                  |
-| **Truncar decimales a 2** | `{valor:.2f}`                                       | `{valor:F2}`                                                                         |
-| **Argumentos opcionales** | def x (y = 5):                                      | int x(int y = 5){ ... }zv                                                            |
-| **LAMBDA**                | lambda argumentos: expresion                        | (argumentos) => expresion \|                 (argumentos) => {secuencia-expresiones} |
-| **Op. Coalescencia nula** | `No hay pero ->resultado = p if x else y`           | `int resultado = null ?? 4 `                                                         |
-| **Ternarios**             | valor_si_verdadero if condicion else valor_si_falso | condicion ? valor_si_verdadero : valor_si_falso                                      |
+| Concepto                        | Python 🐍                                           | C# (Moderno) #️⃣                                                                     |
+| :------------------------------ | :-------------------------------------------------- | :----------------------------------------------------------------------------------- |
+| **Bloques**                     | Indentación obligatoria.                            | Llaves `{ ... }` (La indentación es estética pero recomendada).                      |
+| **Fin de línea**                | Salto de línea.                                     | **Punto y coma `;`** (Obligatorio).                                                  |
+| **Imprimir**                    | `print("Hola")`                                     | `Console.WriteLine("Hola");`                                                         |
+| **Leer teclado**                | `input()`                                           | `Console.ReadLine();`                                                                |
+| **Interpolación**               | `f"Valor: {x}"`                                     | `$"Valor: {x}"` ($ va afuera).                                                       |
+| **Variables**                   | `x = 10` (Dinámico)                                 | `int x = 10;` o `var x = 10;` (Inferencia de tipos).                                 |
+| **Booleanos**                   | `True`, `False`                                     | `true`, `false` (minúscula) same as Julia.                                           |
+| **Nulo**                        | `None`                                              | `null`                                                                               |
+| **Operador AND**                | `and`                                               | `&&`                                                                                 |
+| **Operador OR**                 | `or`                                                | **\|\|**                                                                             |
+| **Operador NOT**                | `not`                                               | `!`                                                                                  |
+| **Coments single-line**         | `# comment`                                         | `// comment`                                                                         |
+| **Coments multi-line**          | `"""comment"""`                                     | `/* comment */`                                                                      |
+| **Convertir a int**             | `int()`                                             | `int.Parse("10")` o `Convert.ToInt32("10")`                                          |
+| **Convertir a float**           | `float()`                                           | `float.Parse("10.5")` , `double.Parse("10.5")`                                       |
+| **Longitud**                    | `len(lista)`                                        | `lista.Count` o `array.Length`                                                       |
+| **Obtener Tipo**                | `type(x)`                                           | `x.GetType()`                                                                        |
+| **Cargar un modulo**            | `import pandas`                                     | **Automático** (si está en el `.csproj`)                                             |
+| **1-Usar atajo**                | `import pandas as pd`                               | `using Newtonsoft.Json;` (No permite alias tipo `as pd`, solo acorta el prefijo).    |
+| **2-Si borras la línea**        | El código falla (`NameError`).                      | El código funciona (si usas el nombre completo).                                     |
+| **Instanciar clase**            | micoche  = Coche()                                  | **Coche** miCoche = **new** Coche();                                                 |
+| **operador incremento**         | **intentos += 1**                                   | **intentos += 1**. Tienes: ++intentos y intentos++ pero xd. usa `+= `y ya.           |
+| **Comparacion**                 | `==`                                                | `==`                                                                                 |
+| **Diferente**                   | `!=`                                                | `!=`                                                                                 |
+| **Mayor / Menor**               | `>`, `<`                                            | `>`, `<`                                                                             |
+| **Mayor o igual**               | `>=`                                                | `>=`                                                                                 |
+| **Division entera**             | `//`                                                | `/`                                                                                  |
+| **Division**                    | `/`                                                 | `/`                                                                                  |
+| **Modulo**                      | `%`                                                 | `%`                                                                                  |
+| **Truncar decimales a 2**       | `{valor:.2f}`                                       | `{valor:F2}`                                                                         |
+| **Argumentos opcionales**       | def x (y = 5):                                      | int x(int y = 5){ ... }zv                                                            |
+| **LAMBDA (funciones anonimas)** | lambda argumentos: expresion                        | (argumentos) => expresion \|                 (argumentos) => {secuencia-expresiones} |
+| **Op. Coalescencia nula**       | `No hay pero ->resultado = p if x else y`           | `int resultado = null ?? 4 `                                                         |
+| **Ternarios**                   | valor_si_verdadero if condicion else valor_si_falso | condicion ? valor_si_verdadero : valor_si_falso                                      |
 
 
 ## 2. El "Boilerplate" Obligatorio
@@ -385,6 +385,24 @@ public class Cuenta
     }
 }
 ```
+
+
+## 10. conjuntos (set -> python ) y conjuntos hash (hashset -> C#)
+
+#### Diferencia en las complejidades entre Listas y hashets(C#)/sets(python) 
+![[Pasted image 20260411160235.png]]
+
+```csharp
+// El equivalente en python a un 'hashset' de C# son simplemente los
+// 'set' de python, o sea, los conjuntos, son el equivalente directo.
+// NO permiten duplicados y NO hay ordern. Esto se debe precisamente
+// a su implementacion con funcion hash, es decir,
+// a cada elemento le asignan un valor numerico unico, por eso no pueden
+// haber dos objetos que sean el mismo y el orden no se guarda por no
+// ser necesario, tanto insercion,
+//como la iteracion asi como la eliminacion son O(1)
+```
+
 
 ---
 **Tags:** #CSharp #Python #Cheatsheet #Sintaxis #ABIA #POO

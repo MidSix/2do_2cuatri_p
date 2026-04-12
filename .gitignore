@@ -64,3 +64,4 @@ CCPD/p/p4/test
 **/*.sln
 **/opencode.json
 **/extras
+**/.continue

@@ -6,10 +6,11 @@ Grupo de prácticas:
     G1.1 - jueves.
 */
 using MundoBloques;//SI, ya se que tecnicamente no hace falta usar este using, pero me gusta como queda
-//using TorresHanoi;
+using TorresHanoi;
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main() // No se espera recibir parametros por
+    //consola.
     {
         string menuPrincipal =
             @"¿Qué ejercicio desea realizar?
@@ -18,7 +19,8 @@ public class Program
                 0) Salir
                 Introduzca una opción:";
 
-        int seleccion = -1;
+        int seleccion = -1; // Simplemente una seleccion cualquiera
+        // fuera de las opciones validas para entrar al while.
         List<int> opcionesValidas = new List<int> { 1, 2, 0 };
 
         while (seleccion != 0)
@@ -29,6 +31,11 @@ public class Program
                 string? input = Console.ReadLine();
                 if (string.IsNullOrEmpty(input)) continue;//esto es para evitar que el programa se crashee si el usuario no introduce nada y le da a enter,
                 //  ya que Convert.ToInt32 no puede convertir una cadena vacía a un número, así que simplemente volvemos a mostrar el menú
+                
+                // yea, simplemente si el string es null o empty
+                // aplica un 'continue' salta a la siguiente iteracion
+                // es decir, vuelve a printear menuPrincipal y esperar
+                // respuesta.
 
                 seleccion = Convert.ToInt32(input);
 
@@ -36,6 +43,12 @@ public class Program
                 {
                     switch (seleccion)//Me apetecio aprender esto de los switch, aunque tampoco es que sea muy complicado, pero bueno, así se ve un poco más ordenado que con ifs
                     {//basicamente lo que haces es meter cada caso dentro de un case, y luego pones un break al final de cada caso para que no se ejecute el siguiente caso, es bastante sencillo
+                    
+                    // Esta guapo esto, me acabo de enterar que en
+                    // python > 3.10.x tambien hay el analogo.
+                    // Los match-case statements, es exactamente lo
+                    // lo mismo, la unica diferencia es que en lugar
+                    // de 'switch' es 'match'. 
                         case 1:
                             Console.WriteLine("Introduzca el número del escenario de Mundo de Bloques a resolver (a o b):");
                             string ?escenario = Console.ReadLine();
@@ -53,11 +66,11 @@ public class Program
                             Console.Write("Introduzca el número de discos (n) para Hanoi: ");
                             if (int.TryParse(Console.ReadLine(), out int n))
                             {
-                                //TorresHanoi.Resolver(n);//Aqui añades tu movida Sebas
+                                TorresHanoi.TorresHanoi.Resolver(n);//Aqui añades tu movida Sebas
                             }
                             else
                             {
-                                Console.WriteLine("Error: El número de discos debe ser un entero.");
+                                Console.WriteLine("Error: El número de discos debe ser un numero natural");
                             }
                             break;
 

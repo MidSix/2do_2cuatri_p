@@ -64,7 +64,7 @@ namespace MundoBloques
 
         private static void EjecutarAgente(Estado inicial, Estado objetivo, List<Accion> ops)
         {//Aqui simplemente inicializamos el planificador con los operadores que hemos generado y se lo damos al agente
-            Planificador planificador = new Planificador(ops);
+            Planificador planificador = new Planificador(ops, new BusquedaAnchura());
             Agente agente = new Agente(planificador);
             agente.EjecutarTarea(inicial, objetivo);
         }
